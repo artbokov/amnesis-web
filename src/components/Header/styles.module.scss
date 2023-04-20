@@ -1,0 +1,37 @@
+@use "../../utils/constants";
+
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: constants.$header-vh;
+  width: 100vw;
+
+  background-color: constants.$green;
+  color: constants.$text;
+
+  font-size: constants.$primary-font-size;
+  font-weight: constants.$primary-font-weight;
+
+  .companyName {
+    position: absolute;
+    left: 120px;
+  }
+
+  .link {
+    width: 130px;
+    line-height: constants.$header-vh;
+
+    text-align: center;
+
+    &:hover {
+      background-color: constants.$light-blue;
+    }
+
+    &.active {
+      background-color: constants.$blue;
+    }
+  }
+}
