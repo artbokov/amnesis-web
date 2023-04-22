@@ -1,9 +1,9 @@
-import Chat from "./Chat/Chat";
-import Info from "./Info/Info";
-import Support from "./Support/Support";
+import ChatPage from "./ChatPage/ChatPage";
+import InfoPage from "./InfoPage/InfoPage";
+import SupportPage from "./SupportPage/SupportPage";
 
 export {
-  Chat,
-  Info,
-  Support,
+  ChatPage,
+  InfoPage,
+  SupportPage,
 };

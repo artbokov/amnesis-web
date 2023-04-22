@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Chat, Info, Support } from "./pages";
+import { ChatPage, InfoPage, SupportPage } from "./pages";
 import { Layout } from "./components";
 
 const App = () => {
@@ -8,9 +8,9 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Info />} />
-          <Route path="chat" element={<Chat />} />
-          <Route path="support" element={<Support />} />
+          <Route index element={<InfoPage />} />
+          <Route path="chat" element={<ChatPage />} />
+          <Route path="support" element={<SupportPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

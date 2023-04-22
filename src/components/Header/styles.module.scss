@@ -9,6 +9,8 @@
   height: constants.$header-vh;
   width: 100vw;
 
+  z-index: constants.$interface-z;
+
   background-color: constants.$green;
   color: constants.$text;
 

@@ -1,3 +1,4 @@
+// 0. GENERAL CONSTANTS
 // elements size
 $header-vh: 52px;
 $footer-vh: 24vh;
@@ -6,6 +7,7 @@ $footer-vh: 24vh;
 $primary-font-weight: 700;
 $secondary-font-weight: 400;
 
+$header-font-size: 40px;
 $primary-font-size: 20px;
 $secondary-font-size: 16px;
 
@@ -18,4 +20,18 @@ $interface-z: 3;
 $green: #71BF44;
 $blue: #00AEEF;
 $light-blue: #00679f;
+$dark-blue: #1A2D74;
 $text: #FFFFFF;
+
+
+// 1. INFO PAGE
+$padding-top: 125px;
+
+$inner-gap: 30px;
+$outer-gap: 60px;
+
+$info-block-width: 750px;
+$guide-block-width: 900px;
+$guide-step-width: 400px;
+
+$guide-step-padding: 10px;

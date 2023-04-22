@@ -1,0 +1,126 @@
+@use "../../utils/constants";
+
+$padding-top: 125px;
+
+$inner-gap: 30px;
+$outer-gap: 60px;
+
+$info-block-width: 750px;
+
+$guide-block-width: 900px;
+$guide-step-width: 400px;
+$guide-step-padding: 10px;
+
+$path-border: 8px;
+$path-width: $guide-block-width / 2 - $guide-step-width - 2 * $path-border;
+
+@mixin vertical-flexbox($gap) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@mixin with-title {
+  .title {
+    text-align: center;
+    font-size: constants.$header-font-size;
+
+    .green {
+      color: constants.$green;
+    }
+  }
+}
+
+.wrapper {
+  @include vertical-flexbox($outer-gap);
+  position: absolute;
+
+  width: 100vw;
+  padding-top: $padding-top;
+  padding-bottom: $padding-top; // to create some space in the bottom
+
+  align-items: center;
+
+  .info {
+    @include vertical-flexbox(constants.$inner-gap);
+    @include with-title;
+
+    width: constants.$info-block-width;
+    color: constants.$dark-blue;
+  }
+
+  .guide {
+    @include vertical-flexbox($inner-gap);
+    @include with-title;
+
+    width: $guide-block-width;
+
+    .step {
+      position: relative;
+
+      width: $guide-step-width - 2 * $guide-step-padding;
+      padding: $guide-step-padding;
+
+      background-color: constants.$blue;
+      color: constants.$text;
+
+      .text {
+        position: relative;
+        z-index: constants.$content-z;
+      }
+
+      .path {
+        position: absolute;
+
+        top: calc(50% - $path-border);
+
+        height: 0;
+        width: $path-width;
+
+        z-index: constants.$background-z;
+
+        border: $path-border solid constants.$blue;
+
+        align-self: flex-start;
+        justify-self: center;
+      }
+
+      .mainPath {
+        position: absolute;
+
+        top: 0;
+
+        height: 100%;
+        width: 0;
+
+        z-index: constants.$background-z;
+
+        border-left: $path-border solid constants.$blue;
+      }
+
+      &.left {
+        align-self: flex-start;
+
+        .path {
+          margin-left: $guide-step-width - $guide-step-padding;
+        }
+
+        .mainPath {
+          margin-left: $guide-block-width / 2 - $path-border / 2 - $guide-step-padding;
+        }
+      }
+
+      &.right {
+        align-self: flex-end;
+        
+        .path {
+          margin-left: - $guide-step-padding - $path-border * 2 - $path-width;
+        }
+
+        .mainPath {
+          margin-left: - $guide-step-padding - $path-border / 2 - $path-width - 2 * $path-border;
+        }
+      }
+    }
+  }
+}
