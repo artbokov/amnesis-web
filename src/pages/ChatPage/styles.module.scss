@@ -1,0 +1,31 @@
+@use "../../utils/constants";
+
+$wrapper-horizontal-margin: calc(
+  (100vw - constants.$chat-width) / 2
+);
+$messages-gap: 25px;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  padding: 0 $wrapper-horizontal-margin;
+
+  width: constants.$chat-width;
+  height: calc(100vh - constants.$header-vh);
+
+  background: constants.$gray;
+
+  .messages {
+    display: flex;
+    flex-direction: column;
+    gap: $messages-gap;
+
+    width: 100%;
+
+    .message {
+
+    }
+  }
+}

@@ -1,9 +1,9 @@
 @use "../../utils/constants";
 
-$padding-top: 125px;
+$padding-top: 90px;
 
 $inner-gap: 30px;
-$outer-gap: 60px;
+$outer-gap: 50px;
 
 $info-block-width: 750px;
 
@@ -11,8 +11,8 @@ $guide-block-width: 900px;
 $guide-step-width: 400px;
 $guide-step-padding: 10px;
 
-$path-border: 8px;
-$path-width: $guide-block-width / 2 - $guide-step-width - 2 * $path-border;
+$path-border: 4px;
+$path-width: calc($guide-block-width / 2 - $guide-step-width - 2 * $path-border);
 
 @mixin vertical-flexbox($gap) {
   display: flex;
@@ -41,11 +41,11 @@ $path-width: $guide-block-width / 2 - $guide-step-width - 2 * $path-border;
 
   align-items: center;
 
-  .info {
-    @include vertical-flexbox(constants.$inner-gap);
+  .summary {
+    @include vertical-flexbox($inner-gap);
     @include with-title;
 
-    width: constants.$info-block-width;
+    width: $info-block-width;
     color: constants.$dark-blue;
   }
 
@@ -96,6 +96,7 @@ $path-width: $guide-block-width / 2 - $guide-step-width - 2 * $path-border;
         z-index: constants.$background-z;
 
         border-left: $path-border solid constants.$blue;
+        border-right: $path-border solid constants.$blue;;
       }
 
       &.left {
@@ -106,7 +107,7 @@ $path-width: $guide-block-width / 2 - $guide-step-width - 2 * $path-border;
         }
 
         .mainPath {
-          margin-left: $guide-block-width / 2 - $path-border / 2 - $guide-step-padding;
+          margin-left: calc($guide-block-width / 2 - $path-border / 2 - $guide-step-padding);
         }
       }
 
@@ -118,7 +119,7 @@ $path-width: $guide-block-width / 2 - $guide-step-width - 2 * $path-border;
         }
 
         .mainPath {
-          margin-left: - $guide-step-padding - $path-border / 2 - $path-width - 2 * $path-border;
+          margin-left: calc(-1 * ($guide-step-padding + $path-border / 2 + $path-width + 2 * $path-border));
         }
       }
     }

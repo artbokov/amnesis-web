@@ -7,7 +7,7 @@ type blockProps = {
   renderSubblock: (text: string, index: number) => JSX.Element,
 };
 
-const Block = ({ classname, title, subblocksData, renderSubblock }: blockProps) => {
+const InfoBlock = ({ classname, title, subblocksData, renderSubblock }: blockProps) => {
   return (
     <div className={classname}>
       <span className={classes.title}> {title} </span>
@@ -16,4 +16,4 @@ const Block = ({ classname, title, subblocksData, renderSubblock }: blockProps) 
   );
 };
 
-export default Block;
+export default InfoBlock;

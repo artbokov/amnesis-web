@@ -1,7 +1,5 @@
-// 0. GENERAL CONSTANTS
-// elements size
+// GENERAL CONSTANTS
 $header-vh: 52px;
-$footer-vh: 24vh;
 
 // font
 $primary-font-weight: 700;
@@ -20,18 +18,11 @@ $interface-z: 3;
 $green: #71BF44;
 $blue: #00AEEF;
 $light-blue: #00679f;
+$aquamarine: #81DDF1;
+$gray: #CECECE;
 $dark-blue: #1A2D74;
 $text: #FFFFFF;
 
-
-// 1. INFO PAGE
-$padding-top: 125px;
-
-$inner-gap: 30px;
-$outer-gap: 60px;
-
-$info-block-width: 750px;
-$guide-block-width: 900px;
-$guide-step-width: 400px;
-
-$guide-step-padding: 10px;
+// chat 
+$chat-width: 50vw;
+$chat-buttons-gap: 100px;
