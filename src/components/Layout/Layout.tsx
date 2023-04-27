@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 
-const Layout = (props: any) => {
+const Layout = () => {
   return <>
     <Header />
     <main>

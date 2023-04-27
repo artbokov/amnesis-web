@@ -1,26 +1,56 @@
+import { useState } from "react";
 import { Button } from "../../../components";
 import classes from "./styles.module.scss";
 
-const Input = () => {
-  return (
-    <div className={classes.wrapper}>
-      <div className={classes.textField}>
+type actionType = "send" | "commit" | "edit";
 
-      </div>
-      <div className={classes.buttons}>
+const buttons: {
+  text: string, 
+  action: actionType, 
+  color: "green" | "blue",
+}[] = [
+  {
+    text: "Отправить",
+    action: "send",
+    color: "green",
+  },
+  {
+    text: "Редактировать",
+    action: "edit",
+    color: "green",
+  },
+  {
+    text: "Всё верно",
+    action: "commit",
+    color: "green",
+  }
+];
+
+const Input = ({onSend}: {onSend: (newMessage: string) => void}) => {
+  const [message, setMessage] = useState("");
+
+  const onAction = (action: actionType) => {
+    if (action === "send") {
+      onSend(message);
+      setMessage("");
+    } 
+  };
+
+  return (
+    <div className={classes.input}>
+
+      <textarea 
+        placeholder="Введите ваш текст тут:"
+        value={message}
+        onChange={e => setMessage(e.target.value)}
+      />
+      
+      {buttons.map(buttonProps => 
         <Button
-          text="Редактировать"
-          onClick={() => { }}
-          color="green"
-          optionalClasses={["chat"]}
+          onClick={() => onAction(buttonProps.action)}
+          {...buttonProps}
         />
-        <Button
-          text="Все верно"
-          onClick={() => { }}
-          color="green"
-          optionalClasses={["chat"]}
-        />
-      </div>
+       )}
     </div>
   );
 }

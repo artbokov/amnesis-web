@@ -5,7 +5,7 @@ import InfoBlock from "./Block/Block";
 const InfoPage = () => {
   return (
     <div className={classes.wrapper}>
-      {blocks.map(block => <InfoBlock {...block} />)}
+      {blocks.map(block => <InfoBlock key={block.id} {...block} />)}
       {/* <Button color="blue" onClick={() => { }} text="Перейти к чату" /> */}
     </div>
   );
@@ -16,7 +16,7 @@ const renderGuideSubblock = (
   text: string,
   index: number,
 ) =>
-  <div className={`${classes.step} ${classes[index % 2 ? "left" : "right"]}`}>
+  <div key={index} className={`${classes.step} ${classes[index % 2 ? "left" : "right"]}`}>
     <div className={classes.path} />
     <div className={classes.mainPath} />
     <div className={classes.text}>{text}</div>
@@ -25,6 +25,7 @@ const renderGuideSubblock = (
 const blocks = [
   // Summary
   {
+    id: 1,
     type: "info",
     classname: classes.summary,
     title: <>Ana<span className={classes.green}>VIT</span> - онкоаналитика</>,
@@ -38,6 +39,7 @@ const blocks = [
   },
   // Guide
   {
+    id: 2,
     type: "info",
     classname: classes.guide,
     title: <span className={classes.green}> Как пользоваться чатом? </span>,

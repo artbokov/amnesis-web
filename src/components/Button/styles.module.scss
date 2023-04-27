@@ -28,8 +28,6 @@ $height: 50px - 2 * $vertical-padding;
 
   &.chat {
     border-radius: 20px;
-    width: calc(
-      constants.$chat-width / 2 - constants.$chat-buttons-gap / 2  - 2 * $horizontal-padding
-    )
+    width: 185px;
   }
 }

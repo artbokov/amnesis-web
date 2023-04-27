@@ -6,14 +6,14 @@ type implementedClasses = "chat";
 type buttonProps = {
   text: string,
   onClick: () => void,
-  color: 'green' | 'blue',
+  color: "green" | "blue",
   optionalClasses?: implementedClasses[]
 };
 
 const Button = ({ text, onClick, color, optionalClasses }: buttonProps) => {
   const optionalClassesString = optionalClasses ? optionalClasses.map(
     classname => classes[classname]
-  ) : [""];
+  ) : [];
 
   return (
     <div
