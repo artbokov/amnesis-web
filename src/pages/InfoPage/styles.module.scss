@@ -1,6 +1,6 @@
 @use "../../utils/constants";
 
-$padding-top: 90px;
+$padding-top: 100px;
 
 $inner-gap: 30px;
 $outer-gap: 50px;
@@ -47,6 +47,9 @@ $path-width: calc($guide-block-width / 2 - $guide-step-width - 2 * $path-border)
 
     width: $info-block-width;
     color: constants.$dark-blue;
+
+    text-align: center;
+    align-items: center;
   }
 
   .guide {
@@ -54,6 +57,23 @@ $path-width: calc($guide-block-width / 2 - $guide-step-width - 2 * $path-border)
     @include with-title;
 
     width: $guide-block-width;
+
+    table {
+      width: 100%;
+      margin-top: 10px;
+
+      text-align: center;
+      
+      &, td {
+        border: 1px solid constants.$text;
+        border-collapse: collapse;
+      }
+
+      td {
+        height: 50px;
+        width: 50%;
+      }
+    }
 
     .step {
       position: relative;
@@ -64,7 +84,7 @@ $path-width: calc($guide-block-width / 2 - $guide-step-width - 2 * $path-border)
       background-color: constants.$blue;
       color: constants.$text;
 
-      .text {
+      .content {
         position: relative;
         z-index: constants.$content-z;
       }

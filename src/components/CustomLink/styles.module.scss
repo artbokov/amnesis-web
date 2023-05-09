@@ -1,0 +1,22 @@
+@use "../../utils/constants";
+
+.link {
+	min-width: 90px;
+	max-width: 225px;
+	
+	padding: 0 20px;
+
+	line-height: constants.$header-vh;
+
+	text-align: center;
+	color: constants.$text;
+
+	&:hover {
+		cursor: pointer;
+		background-color: constants.$light-blue;
+	}
+
+	&.active {
+		background-color: constants.$blue;
+	}
+}

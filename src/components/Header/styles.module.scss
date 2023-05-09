@@ -21,19 +21,4 @@
     position: absolute;
     left: 120px;
   }
-
-  .link {
-    width: 130px;
-    line-height: constants.$header-vh;
-
-    text-align: center;
-
-    &:hover {
-      background-color: constants.$light-blue;
-    }
-
-    &.active {
-      background-color: constants.$blue;
-    }
-  }
 }

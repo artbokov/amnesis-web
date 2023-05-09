@@ -5,9 +5,6 @@ $vertical-padding: 5px;
 $height: 50px - 2 * $vertical-padding;
 
 .button {
-  height: 50px;
-  line-height: 50px;
-  
   text-align: center;
 
   padding: $vertical-padding $horizontal-padding;
@@ -28,6 +25,10 @@ $height: 50px - 2 * $vertical-padding;
 
   &.chat {
     border-radius: 20px;
-    width: 185px;
+  }
+
+  &.disabled {
+    cursor: default;
+    background-color: constants.$gray;
   }
 }

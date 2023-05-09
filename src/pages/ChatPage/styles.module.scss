@@ -1,11 +1,18 @@
 @use "../../utils/constants";
 
-$input-height: 200px;
+$input-height: 150px;
 $input-vertical-padding: 20px;
+
+$button-width: 200px;
+$grid-vertical-gap: 10px;
+$grid-horizontal-gap: 20px;
 
 $horizontal-padding: calc(
   50vw - constants.$chat-input-width / 2
 );
+
+$files-horizontal-gap: 10px;
+$clip-size: 33px;
 
 @mixin customPadding($only-left: true) {
   @if $only-left == true {
@@ -41,14 +48,73 @@ $horizontal-padding: calc(
   .input {
     @include customPadding;
 
+    position: relative;
+
+    display: grid;
+    grid-template-columns: constants.$chat-input-width $button-width;
+    grid-template-rows: repeat(3, 1fr);
+    gap: $grid-vertical-gap $grid-horizontal-gap;
+
+    width: max(
+      calc(100vw - $horizontal-padding),
+      calc(constants.$chat-input-width
+           + $button-width + $grid-horizontal-gap)
+    );
     height: $input-height;
-    width: calc(100vw - $horizontal-padding);
-    
+
     align-self: flex-end;
-    align-items: center;
 
     padding-block: $input-vertical-padding;
 
     background: constants.$blue;
+
+    .textarea {     
+      position: relative;  
+      grid-column: 1;
+      grid-row: 1 / 4;
+
+      textarea {
+        width: calc(100% - 8px); // to compensate border and margin
+        height: calc(100% - 8px);
+
+        font-size: constants.$primary-font-size;
+        resize: none;
+      }
+
+      // svg clip icon
+      .clipIcon {
+        cursor: pointer;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        height: $clip-size;
+      }  
+
+      // uploaded files
+      .uploadedFiles {
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+
+        width: calc(100% - $clip-size);
+        
+        line-height: $clip-size;
+
+        display: flex;
+        justify-content: start;
+
+        gap: $files-horizontal-gap;
+
+        // word icon
+        svg,
+        .text {
+          height: $clip-size;
+          
+          vertical-align: middle;
+          display: inline-block;
+        }
+      }
+    }   
   }
 }

@@ -10,6 +10,10 @@ body {
 
   font-weight: constants.$primary-font-weight;
   font-size: constants.$primary-font-size;
+
+  background-image: url(./assets/background.svg);
+  background-size: 100vw auto;
+  background-attachment: fixed;
 }
 
 code {

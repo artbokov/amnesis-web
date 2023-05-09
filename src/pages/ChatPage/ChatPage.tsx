@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
+import { stages } from "./types";
 import Input from "./Input/Input";
 import classes from "./styles.module.scss";
 import classNames from "classnames";
 
+const stagesList = [stages.REQUEST, stages.APPROVE];
 
 const ChatPage = () => {
   const [messages, setMessages] = useState<string[]>([]);
+  const [stageIndex, setStageIndex] = useState<number>(0);
 
   useEffect(() => {
     // setMessages(); fetch logic
   }, []);
 
   const onSend = (newMessage: string) => {
+    setStageIndex((stageIndex + 1) % stagesList.length);
     setMessages([...messages, newMessage, "Тут будет ответ от бота"]);
   }
 
@@ -26,9 +30,7 @@ const ChatPage = () => {
           />
         )}
       </div>
-      <div className={classes.input}>
-        <Input onSend={onSend} />
-      </div>
+      <Input stage={stagesList[stageIndex]} onSend={onSend} />
     </div>
   );
 };
