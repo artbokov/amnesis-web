@@ -18,7 +18,7 @@ const questions = [
   },
   {
     req: "Ещё вопрос?",
-    res: "Ещё ответ текст текст текст текст текст текст текст текст текст текст текст текст",
+    res: "Ещё ответ текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст",
   }
 ]
 
@@ -26,10 +26,10 @@ const blocks = [
   {
     id: "questions",
     classname: classes.questions,
-    title: <span>Часто задаваемые вопросы</span>,
+    title: <span className={classes.title}>Часто задаваемые вопросы</span>,
     subblocks: [
       <>{questions.map((question, index) => <>
-        <div className={classes.title}>{`${index + 1}. ${question.req}`}</div>
+        <div className={classes.questionTitle}>{`${index + 1}. ${question.req}`}</div>
         {question.res}
       </>)}</>
     ]
