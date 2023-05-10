@@ -6,7 +6,7 @@ type blockProps = {
   subblocks: JSX.Element[],
 };
 
-const InfoBlock = ({ classname, title, subblocks }: blockProps) => {
+const Block = ({ classname, title, subblocks }: blockProps) => {
   return (
     <div className={classname}>
       <span className={classes.title}> {title} </span>
@@ -15,4 +15,4 @@ const InfoBlock = ({ classname, title, subblocks }: blockProps) => {
   );
 };
 
-export default InfoBlock;
+export default Block;

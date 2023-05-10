@@ -1,16 +1,9 @@
 import classes from "./styles.module.scss";
-import InfoBlock from "./InfoBlock/InfoBlock";
-import { CustomLink } from "../../components";
+import { BlockedPage, CustomLink } from "../../components";
 import { ReactComponent as HowItWorksScheme } from "../../assets/sheme.svg";
 
 
-const InfoPage = () => {
-  return (
-    <div className={classes.wrapper}>
-      {blocks.map(block => <InfoBlock key={block.id} {...block} />)}
-    </div>
-  );
-};
+const InfoPage = () => <BlockedPage blocks={blocks}/>;
 
 const GuideExampleTable = () => {
   return <>
@@ -34,10 +27,10 @@ const blocks = [
   {
     id: "summary",
     classname: classes.summary,
-    title: <>Ana<span className={classes.green}>VIT</span></>,
+    title: <>Ana<span>VIT</span></>,
 
     subblocks: [
-      <span key={1}> 
+      <span key={"summary_1"}> 
         AnaVIT (Anamnaesis Vitae) - это комплексная технология, упрощающая взаимодействие врач - пациент 
         благодаря возможности самопроверки для врача и контроля назначения со стороны пациента. 
         Простота использования обусловлена автоматизированным поиском по тексту анамнеза с 
@@ -45,13 +38,13 @@ const blocks = [
         алгоритм, работающий по принципу дерева принятия решений, назначает наиболее релевантую для пациента терапию. 
         Назначение терапии базируется на рекомендациях Министерства Здравоохранения РФ. 
       </span>,
-      <CustomLink key={2} text="Перейти к чату" navigateTo="/chat" isActive={true} />
+      <CustomLink key={"summary_2"} text="Перейти к чату" navigateTo="/chat" isActive={true} />
     ]
   },
   {
     id: "guide",
     classname: classes.guide,
-    title: <span className={classes.green}> Как пользоваться чатом? </span>,
+    title: <span> Как пользоваться чатом? </span>,
 
     subblocks: [
       {align: "left",  content: "Открыть чат по кнопке выше или по кнопке в меню"},
@@ -61,7 +54,7 @@ const blocks = [
       {align: "left",  content: "Далее вы можете отредактировать ваше сообщение или подтветить информацию, выведенную системой. При редактировании вам нужно указать, какой конкретно параметр вы хотите изменить, и написать корректное значение"},
       {align: "right", content: "При успешном согласовании всех параметров система предложит наиболее релевантную терапию"}
     ].map((data: {align: string, content: any}, index: number) => (
-      <div key={index} className={`${classes.step} ${classes[data.align]}`}>
+      <div key={`guide_${index}`} className={`${classes.step} ${classes[data.align]}`}>
         <div className={classes.path} />
         <div className={classes.mainPath} />
         <div className={classes.content}>{data.content}</div>
@@ -70,11 +63,11 @@ const blocks = [
   },
   {
     id: "howItWorks",
-    classname: "",
-    title: <span className={classes.green}> Как это работает? </span>,
+    classname: classes.howItWorks,
+    title: <span> Как это работает? </span>,
     
     subblocks: [
-      <HowItWorksScheme />
+      <HowItWorksScheme key={"howItWorks_1"} />
     ]
   }
 ];

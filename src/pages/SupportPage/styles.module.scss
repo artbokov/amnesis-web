@@ -1,0 +1,10 @@
+$questions-block-width: 920px;
+$questions-block-title-font-size: 40px;
+
+.questions {
+    width: $questions-block-width;
+
+    .title {
+        font-size: $questions-block-title-font-size;
+    }
+}
