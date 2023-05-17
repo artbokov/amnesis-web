@@ -11,8 +11,8 @@ const EVENT_TYPES = {
 type MessageCallback = (message: Message) => void;
 
 class MessagesApi {
-    private callbacks: MessageCallback[];
-    private socket: WebSocket;
+    private callbacks: MessageCallback[] = [];
+    private socket: WebSocket = new WebSocket("ws://oncoanalitika.com/api/connect");
 
     constructor() {
         this.initWs();
@@ -20,8 +20,6 @@ class MessagesApi {
     
     // PRIVATE
     private initWs() {
-        this.socket = new WebSocket("ws://oncoanalitika.com/api/connect");
-
         this.socket.onopen = () => {
             this.socket.send(JSON.stringify({
                 event_type: EVENT_TYPES.AUTH_RQ,

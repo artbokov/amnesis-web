@@ -35,7 +35,7 @@ type Message = {
     options?: Option[]
 };
 
-export {
+export type {
     User, 
     AccessToken,
     RefreshToken,
