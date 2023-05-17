@@ -13,6 +13,16 @@ type RefreshToken = {
 };
 
 // ASYNC
+type Message = {
+    id?: string,
+    creating_dt?: string,
+    is_server_owner?: boolean,
+    text: string,
+
+    files?: File[],
+    options?: Option[]
+};
+
 type File = {
     id: string,
     name?: string,
@@ -25,15 +35,6 @@ type Option = {
     text: string
 };
 
-type Message = {
-    id?: string,
-    creating_dt?: string,
-    is_server_owner?: boolean,
-    text?: string,
-
-    files?: File[],
-    options?: Option[]
-};
 
 export type {
     User, 

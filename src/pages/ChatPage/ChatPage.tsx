@@ -3,6 +3,7 @@ import { stages } from "./types";
 import Input from "./Input/Input";
 import classes from "./styles.module.scss";
 import classNames from "classnames";
+import { messagesApi } from "../../api";
 
 const stagesList = [stages.REQUEST, stages.APPROVE];
 
@@ -11,12 +12,12 @@ const ChatPage = () => {
   const [stageIndex, setStageIndex] = useState<number>(0);
 
   useEffect(() => {
-    // setMessages(); fetch logic
-  }, []);
+    messagesApi.addCallback((newMessage) => setMessages([...messages, newMessage.text]))
+  });
 
   const onSend = (newMessage: string) => {
     setStageIndex((stageIndex + 1) % stagesList.length);
-    setMessages([...messages, newMessage, "Тут будет ответ от бота"]);
+    setMessages([...messages, newMessage]);
   }
 
   return (

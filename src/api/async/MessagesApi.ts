@@ -1,37 +1,36 @@
 import baseApi from "../sync/BaseApi";
-import { Message } from "../models/types";
+import { Message } from "../../models/ApiTypes";
 
+type MessageCallback = (message: Message) => void;
 const EVENT_TYPES = {
     AUTH_RQ: "AuthRq",
     SEND_MESSAGE_RQ: "SendMessageRq",
     CHOOSE_OPINION_RQ: "ChooseOptionRq",
     NEW_MESSAGE_EV: "NewMessageEv",
 };
-
-type MessageCallback = (message: Message) => void;
+const WS_URL = "ws://oncoanalitika.com/api/connect";
 
 class MessagesApi {
     private callbacks: MessageCallback[] = [];
-    private socket: WebSocket = new WebSocket("ws://oncoanalitika.com/api/connect");
+    private socket: WebSocket = new WebSocket(WS_URL);
 
     constructor() {
-        this.initWs();
+        // Socket set up
+        this.socket.onopen = async () => {
+            const accessToken = await baseApi.getAccessToken();
+
+            this.socket.send(JSON.stringify({
+                event_type: EVENT_TYPES.AUTH_RQ,
+                token: accessToken
+            }));
+        };
+
+        this.socket.onmessage = this.onMessage;
     }   
     
     // PRIVATE
-    private initWs() {
-        this.socket.onopen = () => {
-            this.socket.send(JSON.stringify({
-                event_type: EVENT_TYPES.AUTH_RQ,
-                token: baseApi.getAccessToken()
-            }));
-        };
-        this.socket.onmessage = this.onMessage;
-    }
-
     private onMessage(event: any) {
         const response = JSON.parse(event.data);
-
         if (response.event_type !== EVENT_TYPES.NEW_MESSAGE_EV)
             return;
 

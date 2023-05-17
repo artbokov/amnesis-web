@@ -1,6 +1,7 @@
-import { User, RefreshToken, AccessToken } from "../models/types";
+import { User, RefreshToken, AccessToken } from "../../models/ApiTypes";
 
 type Tokens = RefreshToken & AccessToken;
+const BACKEND_URL = "/api";
 
 // Рассчет на то, что api разрастется
 class BaseApi {
@@ -40,39 +41,42 @@ class BaseApi {
 				.catch(error => reject(error));
 		});
 	}
-
+	
 	// Getters
 	getAccessToken() {
-		return this.accessToken;
+		return new Promise<string>((resolve, reject) => {
+            const intervalId = setInterval(() => {
+                if (this.accessToken) {
+                    resolve(this.accessToken);
+                    clearInterval(intervalId);
+                }
+            }, 100);
+            
+            setTimeout(() => reject("getAccessToken error"), 5000);
+        });
 	}
 
 	// PRIVATE
 	// JWT Logic
 	private signIn(user: User) {
-		this.setTokens(
-			this.request<Tokens>("/sign-in", {
-				method: "POST",
-				body: JSON.stringify(user)
-			})
-		);
+        this.request<Tokens>("/sign-in", {
+            method: "POST",
+            body: JSON.stringify(user)
+        }).then(tokens => this.setTokens(tokens));
 	}
 
 	private refresh() {
-		this.setTokens(
-			this.request<Tokens>("/refresh", { 
-				method: "POST",
-				body: JSON.stringify({ refresh_token: this.refreshToken })
-			})
-		);
+        this.request<Tokens>("/refresh", { 
+            method: "POST",
+            body: JSON.stringify({ refresh_token: this.refreshToken })
+        }).then(tokens => this.setTokens(tokens));
 	}
 
-	private async setTokens(tokensPromise: Promise<Tokens>) {
-		const tokens = await tokensPromise;
-
+	private setTokens(tokens: Tokens) {
 		this.accessToken  = tokens.access_token;
 		this.refreshToken = tokens.refresh_token;
 	}
 }
 
-const baseApi = new BaseApi("http://oncoanalitika.com/api");
+const baseApi = new BaseApi(BACKEND_URL);
 export default baseApi;

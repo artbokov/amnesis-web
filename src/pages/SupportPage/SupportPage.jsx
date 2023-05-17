@@ -1,3 +1,4 @@
+import React from "react";
 import { BlockedPage } from "../../components";
 import classes from "./styles.module.scss";
 
@@ -28,10 +29,12 @@ const blocks = [
     classname: classes.questions,
     title: <span className={classes.title}>Часто задаваемые вопросы</span>,
     subblocks: [
-      <>{questions.map((question, index) => <>
-        <div className={classes.questionTitle}>{`${index + 1}. ${question.req}`}</div>
-        {question.res}
-      </>)}</>
+      <>
+        {questions.map((question, index) => <React.Fragment key={index}>
+          <div className={classes.questionTitle}>{`${index + 1}. ${question.req}`}</div>
+          {question.res}
+        </React.Fragment>)}
+      </>
     ]
   },
   {
