@@ -1,7 +1,8 @@
-import { User, RefreshToken, AccessToken } from "./types";
+import { User, RefreshToken, AccessToken } from "../models/types";
 
 type Tokens = RefreshToken & AccessToken;
 
+// Рассчет на то, что api разрастется
 class BaseApi {
 	private apiUrl: string;
 	private accessToken: string;
@@ -14,7 +15,8 @@ class BaseApi {
 		this.signIn({ login: "admin", password: "iwanttodie" });
 	}
 
-	// Generics for request (Interface)
+	// PUBLIC
+	// Generics for request
 	postRequest<requestType, responseType>(
 		url: string,
 		body: requestType
@@ -49,6 +51,12 @@ class BaseApi {
 		});
 	}
 
+	// Getters
+	getAccessToken() {
+		return this.accessToken;
+	}
+
+	// PRIVATE
 	// JWT Logic
 	private async signIn(user: User) {
 		const tokens = await this.postRequest<User, Tokens>("/sign-in", user);

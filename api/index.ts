@@ -1,5 +1,5 @@
-// import baseApi from "./BaseApi"
+import messagesApi from "./async/MessagesApi"
 
 export {
-
-}
+    messagesApi
+};
