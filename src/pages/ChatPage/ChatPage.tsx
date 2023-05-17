@@ -12,10 +12,11 @@ const ChatPage = () => {
   const [stageIndex, setStageIndex] = useState<number>(0);
 
   useEffect(() => {
+    
     messagesApi.addCallback((newMessage) => setMessages([...messages, newMessage.text]))
   });
 
-  const onSend = (newMessage: string) => {
+  const onSend = (newMessage: string, attachedFiles: File[]) => {
     setStageIndex((stageIndex + 1) % stagesList.length);
     setMessages([...messages, newMessage]);
   }

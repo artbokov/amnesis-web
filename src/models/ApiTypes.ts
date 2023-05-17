@@ -12,6 +12,10 @@ type RefreshToken = {
     refresh_token: string
 };
 
+type FileId =  {
+    file_id: string
+};
+
 // ASYNC
 type Message = {
     id?: string,
@@ -40,5 +44,6 @@ export type {
     User, 
     AccessToken,
     RefreshToken,
-    Message
+    Message,
+    FileId
 };

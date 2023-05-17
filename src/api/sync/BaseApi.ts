@@ -1,9 +1,9 @@
-import { User, RefreshToken, AccessToken } from "../../models/ApiTypes";
+import { User, RefreshToken, AccessToken, FileId } from "../../models/ApiTypes";
 
 type Tokens = RefreshToken & AccessToken;
 const BACKEND_URL = "/api";
 
-// Рассчет на то, что api разрастется
+
 class BaseApi {
 	private apiUrl: string;
 	private accessToken: string | null = null;
@@ -13,10 +13,32 @@ class BaseApi {
 		this.apiUrl = url;
 		this.signIn({ login: "admin", password: "iwanttodie" });
 	}
-
+	
 	// PUBLIC
+	// Getters
+	getAccessToken() {
+		return new Promise<string>((resolve, reject) => {
+            const intervalId = setInterval(() => {
+                if (this.accessToken) {
+                    resolve(this.accessToken);
+                    clearInterval(intervalId);
+                }
+            }, 100);
+            
+            setTimeout(() => reject("getAccessToken error"), 5000);
+        });
+	}
+
+	uploadFile(file: File) {
+		return this.request<FileId>("/upload", {
+			method: "POST",
+			body: JSON.stringify({ file: file })
+		});
+	}
+
+	// PRIVATE
 	// Generic for POST & GET requests
-	request<responseType>(
+	private request<responseType>(
 		url: string,
 		requestOptions: {
 			method: "POST" | "GET",
@@ -41,22 +63,7 @@ class BaseApi {
 				.catch(error => reject(error));
 		});
 	}
-	
-	// Getters
-	getAccessToken() {
-		return new Promise<string>((resolve, reject) => {
-            const intervalId = setInterval(() => {
-                if (this.accessToken) {
-                    resolve(this.accessToken);
-                    clearInterval(intervalId);
-                }
-            }, 100);
-            
-            setTimeout(() => reject("getAccessToken error"), 5000);
-        });
-	}
 
-	// PRIVATE
 	// JWT Logic
 	private signIn(user: User) {
         this.request<Tokens>("/sign-in", {

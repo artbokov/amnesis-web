@@ -34,7 +34,7 @@ const buttons: {
 ];
 
 type inputProps = {
-  onSend: (newMessage: string) => void,
+  onSend: (newMessage: string, attachedFiles: File[]) => void,
   stage: stageType
 };
 
@@ -43,24 +43,19 @@ const Input = ({onSend, stage}: inputProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
   const onAction = (action: actionType) => {
-    switch (action) 
-    {
-      case actions.SEND: {
-        onSend(message);
-        setMessage("");
-        setFiles([]);
-        break;
-      }
-      case actions.COMMIT: {
-        break;
-      }
-      case actions.EDIT: {
-        break;
-      }
-      default: {
-        break;
-      }
-    } 
+    if (action === actions.SEND) {
+      onSend(message, files);
+
+      setMessage("");
+      setFiles([]);
+      return;
+    }
+    if (action === actions.COMMIT) {
+      return;
+    }
+    if (action === actions.EDIT) {
+      return;
+    }
   };
 
   const onFileAttach = (newFile: File) => {
