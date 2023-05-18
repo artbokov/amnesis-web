@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { Button } from "../../../components";
 import classes from "../styles.module.scss";
-import { stages, actionType, stageType, actions } from "../types";
-import TextArea from "./TextArea";
-import FileInput from "./FileInput";
-import AttachedFiles from "./AttachedFiles";
+import {
+	stages,
+	actionType,
+	stageType,
+	actions,
+} from "../../../models/ChatTypes";
+import TextArea from "./TextArea/TextArea";
+import FileInput from "./FileInput/FileInput";
+import AttachedFiles from "./AttachedFiles/AttachedFiles";
 
 const buttons: {
 	key: number;

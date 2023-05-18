@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ChatPage, InfoPage, SupportPage } from "./pages";
 import { Layout } from "./components";

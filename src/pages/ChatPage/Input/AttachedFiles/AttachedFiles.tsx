@@ -1,5 +1,5 @@
-import classes from "../styles.module.scss";
-import { ReactComponent as FileIcon } from "../../../assets/fileIcon.svg";
+import classes from "../../styles.module.scss";
+import { ReactComponent as FileIcon } from "../../../../assets/fileIcon.svg";
 
 type attachedFilesProps = {
 	filenames: string[];

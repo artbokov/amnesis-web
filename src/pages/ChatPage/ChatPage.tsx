@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { stages } from "./types";
+import { stages } from "../../models/ChatTypes";
 import Input from "./Input/Input";
 import classes from "./styles.module.scss";
 import classNames from "classnames";
@@ -20,6 +20,7 @@ const ChatPage = () => {
 	const onSend = (newMessage: string, attachedFiles: File[]) => {
 		setStageIndex((stageIndex + 1) % stagesList.length);
 		setMessages([...messages, newMessage]);
+		messagesApi.sendMessage(newMessage, attachedFiles);
 	};
 
 	return (

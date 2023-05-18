@@ -28,12 +28,14 @@ class MessagesApi {
 			);
 		};
 
-		this.socket.onmessage = this.onMessage;
+		this.socket.onmessage = (e) => this.onMessage(e);
 	}
 
 	// PRIVATE
 	private onMessage(event: any) {
 		const response = JSON.parse(event.data);
+		console.log(response);
+
 		if (response.event_type !== EVENT_TYPES.NEW_MESSAGE_EV) return;
 
 		this.callbacks.forEach((callback) => callback(response.message));
@@ -46,8 +48,11 @@ class MessagesApi {
 		Promise.all(filesIdsPromises).then((filesIds) => {
 			this.socket.send(
 				JSON.stringify({
-					text: text,
-					files: filesIds,
+					event_type: EVENT_TYPES.SEND_MESSAGE_RQ,
+					message: {
+						text: text,
+						files: filesIds,
+					},
 				})
 			);
 		});

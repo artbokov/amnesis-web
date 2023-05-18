@@ -14,7 +14,6 @@ class BaseApi {
 	}
 
 	// PUBLIC
-	// Getters
 	getAccessToken() {
 		return new Promise<string>((resolve, reject) => {
 			const intervalId = setInterval(() => {
@@ -24,14 +23,24 @@ class BaseApi {
 				}
 			}, 100);
 
-			setTimeout(() => reject("getAccessToken error"), 5000);
+			setTimeout(() => reject("getAccessToken timeout error"), 5000);
 		});
 	}
 
 	uploadFile(file: File) {
-		return this.request<FileId>("/upload", {
-			method: "POST",
-			body: JSON.stringify({ file: file }),
+		return new Promise<FileId>((resolve, reject) => {
+			const fileReader = new FileReader();
+
+			fileReader.readAsBinaryString(file);
+			fileReader.onload = (event) => {
+				resolve(
+					this.request<FileId>("/upload", {
+						method: "POST",
+						body: JSON.stringify({ file: fileReader.result }),
+					})
+				);
+			};
+			fileReader.onerror = () => reject("uploadFile error");
 		});
 	}
 
@@ -42,10 +51,11 @@ class BaseApi {
 		requestOptions: {
 			method: "POST" | "GET";
 			body?: BodyInit;
-		}
+		},
+		shouldRefresh = true
 	) {
 		// Refresh tokens if already signed in
-		this.accessToken && this.refresh();
+		shouldRefresh && this.refresh();
 
 		const fetchOptions = {
 			headers: {
@@ -65,17 +75,25 @@ class BaseApi {
 
 	// JWT Logic
 	private signIn(user: User) {
-		this.request<Tokens>("/sign-in", {
-			method: "POST",
-			body: JSON.stringify(user),
-		}).then((tokens) => this.setTokens(tokens));
+		this.request<Tokens>(
+			"/sign-in",
+			{
+				method: "POST",
+				body: JSON.stringify(user),
+			},
+			false
+		).then((tokens) => this.setTokens(tokens));
 	}
 
 	private refresh() {
-		this.request<Tokens>("/refresh", {
-			method: "POST",
-			body: JSON.stringify({ refresh_token: this.refreshToken }),
-		}).then((tokens) => this.setTokens(tokens));
+		this.request<Tokens>(
+			"/refresh",
+			{
+				method: "POST",
+				body: JSON.stringify({ refresh_token: this.refreshToken }),
+			},
+			false
+		).then((tokens) => this.setTokens(tokens));
 	}
 
 	private setTokens(tokens: Tokens) {

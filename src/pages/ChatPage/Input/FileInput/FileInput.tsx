@@ -1,5 +1,5 @@
-import classes from "../styles.module.scss";
-import { ReactComponent as ClipIcon } from "../../../assets/clip.svg";
+import classes from "../../styles.module.scss";
+import { ReactComponent as ClipIcon } from "../../../../assets/clip.svg";
 
 type fileInputProps = { onFileAttach: (f: File) => void };
 
