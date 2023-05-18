@@ -13,11 +13,5 @@ const stages = {
 };
 type stageType = valueOf<typeof stages>;
 
-export type {
-	actionType,
-	stageType,
-};
-export { 
-	stages,
-	actions
-};
+export type { actionType, stageType };
+export { stages, actions };

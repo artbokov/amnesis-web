@@ -7,34 +7,34 @@ $inner-gap: 30px;
 $outer-gap: 60px;
 
 @mixin vertical-flexbox($gap) {
-  display: flex;
-  flex-direction: column;
-  gap: $gap;
+	display: flex;
+	flex-direction: column;
+	gap: $gap;
 }
 
 @mixin with-title {
-  .title {
-    text-align: center;
-    font-size: constants.$header-font-size;
+	.title {
+		text-align: center;
+		font-size: constants.$header-font-size;
 
-    span {
-      color: constants.$green;
-    }
-  }
+		span {
+			color: constants.$green;
+		}
+	}
 }
 
 .wrapper {
-  @include vertical-flexbox($outer-gap);
-  position: absolute;
+	@include vertical-flexbox($outer-gap);
+	position: absolute;
 
-  width: 100vw;
-  padding-top: $padding-top;
-  padding-bottom: $padding-bottom; // to create some space in the bottom
+	width: 100vw;
+	padding-top: $padding-top;
+	padding-bottom: $padding-bottom; // to create some space in the bottom
 
-  align-items: center;
+	align-items: center;
 
-  &>div{
-    @include vertical-flexbox($inner-gap);
-    @include with-title();
-  }
+	& > div {
+		@include vertical-flexbox($inner-gap);
+		@include with-title();
+	}
 }

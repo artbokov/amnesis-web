@@ -1,24 +1,24 @@
 @use "../../utils/constants";
 
 .header {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-  height: constants.$header-vh;
-  width: 100vw;
+	height: constants.$header-vh;
+	width: 100vw;
 
-  z-index: constants.$interface-z;
+	z-index: constants.$interface-z;
 
-  background-color: constants.$green;
-  color: constants.$text;
+	background-color: constants.$green;
+	color: constants.$text;
 
-  font-size: constants.$primary-font-size;
-  font-weight: constants.$primary-font-weight;
+	font-size: constants.$primary-font-size;
+	font-weight: constants.$primary-font-weight;
 
-  .companyName {
-    position: absolute;
-    left: 120px;
-  }
+	.companyName {
+		position: absolute;
+		left: 120px;
+	}
 }

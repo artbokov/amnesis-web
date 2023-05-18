@@ -8,41 +8,38 @@ import { messagesApi } from "../../api";
 const stagesList = [stages.REQUEST, stages.APPROVE];
 
 const ChatPage = () => {
-  const [messages, setMessages] = useState<string[]>([]);
-  const [stageIndex, setStageIndex] = useState<number>(0);
+	const [messages, setMessages] = useState<string[]>([]);
+	const [stageIndex, setStageIndex] = useState<number>(0);
 
-  useEffect(() => {
-    
-    messagesApi.addCallback((newMessage) => setMessages([...messages, newMessage.text]))
-  });
+	useEffect(() => {
+		messagesApi.addCallback((newMessage) =>
+			setMessages([...messages, newMessage.text])
+		);
+	});
 
-  const onSend = (newMessage: string, attachedFiles: File[]) => {
-    setStageIndex((stageIndex + 1) % stagesList.length);
-    setMessages([...messages, newMessage]);
-  }
+	const onSend = (newMessage: string, attachedFiles: File[]) => {
+		setStageIndex((stageIndex + 1) % stagesList.length);
+		setMessages([...messages, newMessage]);
+	};
 
-  return (
-    <div className={classes.chatWrapper}>
-      <div className={classes.messages}>
-        {messages?.map((message, index) => 
-          <Message 
-            key={index}
-            index={index} 
-            text={message} 
-          />
-        )}
-      </div>
-      <Input stage={stagesList[stageIndex]} onSend={onSend} />
-    </div>
-  );
+	return (
+		<div className={classes.chatWrapper}>
+			<div className={classes.messages}>
+				{messages?.map((message, index) => (
+					<Message key={index} index={index} text={message} />
+				))}
+			</div>
+			<Input stage={stagesList[stageIndex]} onSend={onSend} />
+		</div>
+	);
 };
 
-const Message = ({index, text}: {index: number, text: string}) => {
-  return (
-    <div className={classNames((index % 2) && classes.green, classes.message)}> 
-      {text} 
-    </div>
-  );
+const Message = ({ index, text }: { index: number; text: string }) => {
+	return (
+		<div className={classNames(index % 2 && classes.green, classes.message)}>
+			{text}
+		</div>
+	);
 };
 
 export default ChatPage;

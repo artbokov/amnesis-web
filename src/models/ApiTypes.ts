@@ -1,49 +1,42 @@
 // SYNC
 type User = {
-	login: string,
-	password: string
+	login: string;
+	password: string;
 };
 
 type AccessToken = {
-	access_token: string
+	access_token: string;
 };
 
 type RefreshToken = {
-    refresh_token: string
+	refresh_token: string;
 };
 
-type FileId =  {
-    file_id: string
+type FileId = {
+	file_id: string;
 };
 
 // ASYNC
 type Message = {
-    id?: string,
-    creating_dt?: string,
-    is_server_owner?: boolean,
-    text: string,
+	id?: string;
+	creating_dt?: string;
+	is_server_owner?: boolean;
+	text: string;
 
-    files?: File[],
-    options?: Option[]
+	files?: File[];
+	options?: Option[];
 };
 
 type File = {
-    id: string,
-    name?: string,
-    content_type?: string,
-    size?: number 
+	id: string;
+	name?: string;
+	content_type?: string;
+	size?: number;
 };
 
 type Option = {
-    name: string,
-    text: string
+	name: string;
+	text: string;
 };
 
-
-export type {
-    User, 
-    AccessToken,
-    RefreshToken,
-    Message,
-    FileId
-};
+export type { User, AccessToken, RefreshToken, Message, FileId };

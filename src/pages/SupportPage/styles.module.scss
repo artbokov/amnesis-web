@@ -2,14 +2,14 @@ $questions-block-width: 920px;
 $questions-block-title-font-size: 40px;
 
 .questions {
-    width: $questions-block-width;
-    line-height: 22px;
+	width: $questions-block-width;
+	line-height: 22px;
 
-    .title {
-        line-height: 60px;
-    }
+	.title {
+		line-height: 60px;
+	}
 
-    .questionTitle {
-        font-size: $questions-block-title-font-size;
-    }
+	.questionTitle {
+		font-size: $questions-block-title-font-size;
+	}
 }

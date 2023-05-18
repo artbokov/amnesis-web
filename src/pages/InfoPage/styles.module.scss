@@ -8,108 +8,116 @@ $guide-step-width: 400px;
 $guide-step-padding: 10px;
 
 $path-border: 4px;
-$path-width: calc($guide-block-width / 2 - $guide-step-width - 2 * $path-border);
+$path-width: calc(
+	$guide-block-width / 2 - $guide-step-width - 2 * $path-border
+);
 
 .summary {
-  width: $info-block-width;
-  color: constants.$dark-blue;
+	width: $info-block-width;
+	color: constants.$dark-blue;
 
-  padding-top: $info-padding-top;
+	padding-top: $info-padding-top;
 
-  text-align: center;
-  align-items: center;
+	text-align: center;
+	align-items: center;
 }
 
 .guide {
-  width: $guide-block-width;
+	width: $guide-block-width;
 
-  table {
-    width: 100%;
-    margin-top: 10px;
+	table {
+		width: 100%;
+		margin-top: 10px;
 
-    text-align: center;
-    
-    &, td {
-      border: 1px solid constants.$text;
-      border-collapse: collapse;
-    }
+		text-align: center;
 
-    td {
-      height: 50px;
-      width: 50%;
-    }
-  }
+		&,
+		td {
+			border: 1px solid constants.$text;
+			border-collapse: collapse;
+		}
 
-  .step {
-    position: relative;
+		td {
+			height: 50px;
+			width: 50%;
+		}
+	}
 
-    width: $guide-step-width - 2 * $guide-step-padding;
-    padding: $guide-step-padding;
+	.step {
+		position: relative;
 
-    background-color: constants.$blue;
-    color: constants.$text;
+		width: $guide-step-width - 2 * $guide-step-padding;
+		padding: $guide-step-padding;
 
-    .content {
-      position: relative;
-      z-index: constants.$content-z;
-    }
+		background-color: constants.$blue;
+		color: constants.$text;
 
-    .path {
-      position: absolute;
+		.content {
+			position: relative;
+			z-index: constants.$content-z;
+		}
 
-      top: calc(50% - $path-border);
+		.path {
+			position: absolute;
 
-      height: 0;
-      width: $path-width;
+			top: calc(50% - $path-border);
 
-      z-index: constants.$background-z;
+			height: 0;
+			width: $path-width;
 
-      border: $path-border solid constants.$blue;
+			z-index: constants.$background-z;
 
-      align-self: flex-start;
-      justify-self: center;
-    }
+			border: $path-border solid constants.$blue;
 
-    .mainPath {
-      position: absolute;
+			align-self: flex-start;
+			justify-self: center;
+		}
 
-      top: 0;
+		.mainPath {
+			position: absolute;
 
-      height: 100%;
-      width: 0;
+			top: 0;
 
-      z-index: constants.$background-z;
+			height: 100%;
+			width: 0;
 
-      border-left: $path-border solid constants.$blue;
-      border-right: $path-border solid constants.$blue;;
-    }
+			z-index: constants.$background-z;
 
-    &.left {
-      align-self: flex-start;
+			border-left: $path-border solid constants.$blue;
+			border-right: $path-border solid constants.$blue;
+		}
 
-      .path {
-        margin-left: $guide-step-width - $guide-step-padding;
-      }
+		&.left {
+			align-self: flex-start;
 
-      .mainPath {
-        margin-left: calc($guide-block-width / 2 - $path-border / 2 - $guide-step-padding);
-      }
-    }
+			.path {
+				margin-left: $guide-step-width - $guide-step-padding;
+			}
 
-    &.right {
-      align-self: flex-end;
-      
-      .path {
-        margin-left: - $guide-step-padding - $path-border * 2 - $path-width;
-      }
+			.mainPath {
+				margin-left: calc(
+					$guide-block-width / 2 - $path-border / 2 - $guide-step-padding
+				);
+			}
+		}
 
-      .mainPath {
-        margin-left: calc(-1 * ($guide-step-padding + $path-border / 2 + $path-width + 2 * $path-border));
-      }
-    }
-  }
+		&.right {
+			align-self: flex-end;
+
+			.path {
+				margin-left: -$guide-step-padding - $path-border * 2 - $path-width;
+			}
+
+			.mainPath {
+				margin-left: calc(
+					-1 * ($guide-step-padding + $path-border / 2 + $path-width + 2 *
+								$path-border)
+				);
+			}
+		}
+	}
 }
 
 // .howItWorks {
-  
+
 // }
