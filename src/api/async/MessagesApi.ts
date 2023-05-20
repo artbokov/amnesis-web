@@ -19,12 +19,23 @@ const EVENT_TYPES = {
 };
 
 class MessagesApi {
-	private historyCallback: HistoryCallback[] = [];
-	private messageCallbacks: MessageCallback[] = [];
+	private historyCallback: HistoryCallback | null = null;
+	private messageCallbacks: MessageCallback | null = null;
 	private socket: WebSocket = new WebSocket(WS_URL);
 
-	constructor() {
-		// Socket set up
+	constructor(
+		historyCallback: HistoryCallback,
+		messageCallback: MessageCallback
+	) {
+		// Callbacks
+		this.historyCallback = historyCallback;
+		this.messageCallbacks = messageCallback;
+
+		this.setUpSocket();
+	}
+
+	// PRIVATE
+	private setUpSocket() {
 		this.socket.onopen = async () => {
 			const accessToken = await baseApi.getAccessToken();
 
@@ -35,6 +46,7 @@ class MessagesApi {
 					token: accessToken,
 				})
 			);
+
 			// History request
 			this.socket.send(
 				JSON.stringify({
@@ -42,21 +54,19 @@ class MessagesApi {
 				})
 			);
 		};
+
 		this.socket.onmessage = (e) => this.onMessage(e);
 	}
 
-	// PRIVATE
 	private onMessage(event: any) {
 		const response = JSON.parse(event.data);
-		console.log(response);
+
 		if (response.event_type === EVENT_TYPES.NEW_MESSAGE_EV) {
-			this.messageCallbacks.forEach((callback) => callback(response.message));
+			this.messageCallbacks && this.messageCallbacks(response.message);
 			return;
 		}
 		if (response.event_type === EVENT_TYPES.RS_TO_HISTORY_RQ) {
-			this.historyCallback.forEach((callback) =>
-				callback(response.data.history)
-			);
+			this.historyCallback && this.historyCallback(response.data.history);
 			return;
 		}
 	}
@@ -76,15 +86,6 @@ class MessagesApi {
 			);
 		});
 	}
-
-	addMessageCallback(callback: MessageCallback) {
-		this.messageCallbacks.push(callback);
-	}
-
-	addHistoryCallback(callback: HistoryCallback) {
-		this.historyCallback.push(callback);
-	}
 }
 
-const messagesApi = new MessagesApi();
-export default messagesApi;
+export default MessagesApi;

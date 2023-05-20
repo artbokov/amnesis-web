@@ -3,27 +3,28 @@ import { stages } from "../../models/ChatTypes";
 import Input from "./Input/Input";
 import classes from "./styles.module.scss";
 import classNames from "classnames";
-import { messagesApi } from "../../api";
+import { MessagesApi } from "../../api";
 
 const stagesList = [stages.REQUEST, stages.APPROVE];
 
 const ChatPage = () => {
+	const [messagesApi, setMessagesApi] = useState<MessagesApi | null>(null);
 	const [messages, setMessages] = useState<string[]>([]);
 	const [stageIndex, setStageIndex] = useState<number>(0);
 
 	useEffect(() => {
-		messagesApi.addMessageCallback((newMessage) =>
-			setMessages([...messages, newMessage.text])
-		);
-		messagesApi.addHistoryCallback((messages) =>
-			setMessages(messages.map((message) => message.text))
+		setMessagesApi(
+			new MessagesApi(
+				(history) => setMessages(history.map((message) => message.text)),
+				(newMessage) => setMessages((history) => [newMessage.text, ...history])
+			)
 		);
 	}, []);
 
 	const onSend = (newMessage: string, attachedFiles: File[]) => {
 		setStageIndex((stageIndex + 1) % stagesList.length);
-		setMessages([...messages, newMessage]);
-		messagesApi.sendMessage(newMessage, attachedFiles);
+		setMessages([newMessage, ...messages]);
+		messagesApi && messagesApi.sendMessage(newMessage, attachedFiles);
 	};
 
 	return (

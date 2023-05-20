@@ -1,3 +1,3 @@
-import messagesApi from "./async/MessagesApi";
+import MessagesApi from "./async/MessagesApi";
 
-export { messagesApi };
+export { MessagesApi };
