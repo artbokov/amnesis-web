@@ -24,8 +24,8 @@ class BaseApi {
 				}
 			}, 100);
 
-			setTimeout(() => this.refresh(), 500);
-			setTimeout(() => this.signIn(USER), 1000);
+			// setTimeout(() => this.refresh(), 500);
+			// setTimeout(() => this.signIn(USER), 1000);
 			setTimeout(() => reject("Get AccessToken timeout error"), 1500);
 		});
 	}
