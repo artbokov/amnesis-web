@@ -15,15 +15,16 @@ const ChatPage = () => {
 	useEffect(() => {
 		setMessagesApi(
 			new MessagesApi(
-				(history) => setMessages(history.map((message) => message.text)),
-				(newMessage) => setMessages((history) => [newMessage.text, ...history])
+				(history) =>
+					setMessages(history.map((message) => message.text).reverse()),
+				(newMessage) => setMessages((history) => [...history, newMessage.text])
 			)
 		);
 	}, []);
 
 	const onSend = (newMessage: string, attachedFiles: File[]) => {
 		setStageIndex((stageIndex + 1) % stagesList.length);
-		setMessages([newMessage, ...messages]);
+		setMessages([...messages, newMessage]);
 		messagesApi && messagesApi.sendMessage(newMessage, attachedFiles);
 	};
 

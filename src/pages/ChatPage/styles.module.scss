@@ -25,8 +25,8 @@ $clip-size: 33px;
 	height: calc(100vh - constants.$header-vh);
 
 	.messages {
-		display: flex;
-		flex-direction: column-reverse;
+		// display: flex;
+		// flex-direction: column-reverse;
 
 		overflow-y: auto;
 

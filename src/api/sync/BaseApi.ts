@@ -2,6 +2,7 @@ import { User, RefreshToken, AccessToken, FileId } from "../../models/ApiTypes";
 
 type Tokens = RefreshToken & AccessToken;
 const BACKEND_URL = "/api";
+const USER = { login: "admin", password: "iwanttodie" };
 
 class BaseApi {
 	private apiUrl: string;
@@ -10,11 +11,11 @@ class BaseApi {
 
 	constructor(url: string) {
 		this.apiUrl = url;
-		this.signIn({ login: "admin", password: "iwanttodie" });
+		this.signIn(USER);
 	}
 
 	// PUBLIC
-	getAccessToken() {
+	async getAccessToken() {
 		return new Promise<string>((resolve, reject) => {
 			const intervalId = setInterval(() => {
 				if (this.accessToken) {
@@ -23,7 +24,9 @@ class BaseApi {
 				}
 			}, 100);
 
-			setTimeout(() => reject("getAccessToken timeout error"), 5000);
+			setTimeout(() => this.refresh(), 500);
+			setTimeout(() => this.signIn(USER), 1000);
+			setTimeout(() => reject("Get AccessToken timeout error"), 1500);
 		});
 	}
 
@@ -32,7 +35,7 @@ class BaseApi {
 			const fileReader = new FileReader();
 
 			fileReader.readAsBinaryString(file);
-			fileReader.onload = (event) => {
+			fileReader.onload = () => {
 				resolve(
 					this.request<FileId>("/upload", {
 						method: "POST",
