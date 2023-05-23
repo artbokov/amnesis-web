@@ -58,7 +58,7 @@ $clip-size: 33px;
 			calc(100vw - $horizontal-padding),
 			calc(constants.$chat-input-width + $button-width + $grid-horizontal-gap)
 		);
-		height: $input-height;
+		min-height: $input-height;
 
 		align-self: flex-end;
 
@@ -89,30 +89,34 @@ $clip-size: 33px;
 				height: $clip-size;
 			}
 
-			// uploaded files
 			.uploadedFiles {
 				position: absolute;
 				bottom: 0;
 				left: 10px;
 
-				width: calc(100% - $clip-size);
-
-				line-height: $clip-size;
-
-				display: flex;
-				justify-content: start;
-
-				gap: $files-horizontal-gap;
-
-				// word icon
 				svg,
 				.text {
 					height: $clip-size;
-
-					vertical-align: middle;
-					display: inline-block;
 				}
 			}
 		}
+	}
+}
+
+// uploaded files
+.uploadedFiles {
+	width: calc(100% - $clip-size);
+
+	display: flex;
+	justify-content: start;
+
+	gap: $files-horizontal-gap;
+
+	// word icon
+	svg,
+	.text {
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 5px;
 	}
 }

@@ -1,31 +1,37 @@
 import { useEffect, useState } from "react";
-import { stages } from "../../models/ChatTypes";
 import Input from "./Input/Input";
 import classes from "./styles.module.scss";
 import classNames from "classnames";
 import { MessagesApi } from "../../api";
-
-const stagesList = [stages.REQUEST, stages.APPROVE];
+import AttachedFiles from "./Input/AttachedFiles/AttachedFiles";
 
 const ChatPage = () => {
 	const [messagesApi, setMessagesApi] = useState<MessagesApi | null>(null);
 	const [messages, setMessages] = useState<string[]>([]);
-	const [stageIndex, setStageIndex] = useState<number>(0);
+	const [options, setOptions] = useState<[string, string][]>();
 
 	useEffect(() => {
 		setMessagesApi(
 			new MessagesApi(
 				(history) =>
 					setMessages(history.map((message) => message.text).reverse()),
-				(newMessage) => setMessages((history) => [...history, newMessage.text])
+				(newMessage) => {
+					setOptions(
+						newMessage.options?.map((option) => [option.name, option.text])
+					);
+					setMessages((history) => [...history, newMessage.text]);
+				}
 			)
 		);
 	}, []);
 
-	const onSend = (newMessage: string, attachedFiles: File[]) => {
-		setStageIndex((stageIndex + 1) % stagesList.length);
+	const onMessageSend = (newMessage: string, attachedFiles: File[]) => {
 		setMessages([...messages, newMessage]);
 		messagesApi && messagesApi.sendMessage(newMessage, attachedFiles);
+	};
+
+	const onOptionSend = (optionName: string) => {
+		messagesApi && messagesApi.sendOption(optionName);
 	};
 
 	return (
@@ -35,15 +41,28 @@ const ChatPage = () => {
 					<Message key={index} index={index} text={message} />
 				))}
 			</div>
-			<Input stage={stagesList[stageIndex]} onSend={onSend} />
+			<Input
+				options={options ? options : []}
+				onMessageSend={onMessageSend}
+				onOptionSend={onOptionSend}
+			/>
 		</div>
 	);
 };
 
-const Message = ({ index, text }: { index: number; text: string }) => {
+const Message = ({
+	index,
+	text,
+	filenames,
+}: {
+	index: number;
+	text: string;
+	filenames?: string[];
+}) => {
 	return (
 		<div className={classNames(index % 2 && classes.green, classes.message)}>
 			{text}
+			{filenames && <AttachedFiles filenames={filenames} />}
 		</div>
 	);
 };

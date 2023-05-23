@@ -23,6 +23,8 @@ class MessagesApi {
 	private messageCallbacks: MessageCallback | null = null;
 	private socket: WebSocket = new WebSocket(WS_URL);
 
+	private lastMessageId: number | null = null;
+
 	constructor(
 		historyCallback: HistoryCallback,
 		messageCallback: MessageCallback
@@ -62,6 +64,7 @@ class MessagesApi {
 		const response = JSON.parse(event.data);
 
 		if (response.event_type === EVENT_TYPES.NEW_MESSAGE_EV) {
+			this.lastMessageId = response.message.id;
 			this.messageCallbacks && this.messageCallbacks(response.message);
 			return;
 		}
@@ -70,6 +73,7 @@ class MessagesApi {
 			return;
 		}
 	}
+
 	// PUBLIC
 	sendMessage(text: string, files: File[]) {
 		const filesIdsPromises = files.map((file) => baseApi.uploadFile(file));
@@ -85,6 +89,16 @@ class MessagesApi {
 				})
 			);
 		});
+	}
+
+	sendOption(optionName: string) {
+		this.socket.send(
+			JSON.stringify({
+				event_type: EVENT_TYPES.CHOOSE_OPINION_RQ,
+				answer_to: this.lastMessageId,
+				choice: optionName,
+			})
+		);
 	}
 }
 
