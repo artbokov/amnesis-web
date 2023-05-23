@@ -4,9 +4,10 @@ import classes from "./styles.module.scss";
 import classNames from "classnames";
 import { messagesApi } from "../../api";
 import AttachedFiles from "./Input/AttachedFiles/AttachedFiles";
+import { Message as MessageType } from "../../models/types";
 
 const ChatPage = () => {
-	const [messages, setMessages] = useState<string[]>([]);
+	const [messages, setMessages] = useState<MessageType[]>([]);
 	const [options, setOptions] = useState<[string, string][]>();
 
 	useEffect(() => {
@@ -14,19 +15,27 @@ const ChatPage = () => {
 			setOptions(
 				newMessage.options?.map((option) => [option.name, option.text])
 			);
-			setMessages((history) => [...history, newMessage.text]);
+			setMessages((history) => [...history, newMessage]);
 		});
 		messagesApi.setHistoryCallback((history) =>
-			setMessages(history.map((message) => message.text).reverse())
+			setMessages(history.map((message) => message).reverse())
 		);
+		messagesApi.requestHistory();
 	}, []);
 
-	const onMessageSend = (newMessage: string, attachedFiles: File[]) => {
-		setMessages([...messages, newMessage]);
-		messagesApi && messagesApi.sendMessage(newMessage, attachedFiles);
+	const onMessageSend = (newMessageText: string, attachedFiles: File[]) => {
+		setMessages([
+			...messages,
+			{
+				text: newMessageText,
+				files: attachedFiles.map((file) => ({ name: file.name })),
+			},
+		]);
+		messagesApi && messagesApi.sendMessage(newMessageText, attachedFiles);
 	};
 
 	const onOptionSend = (optionName: string) => {
+		setMessages([...messages, { text: optionName }]);
 		messagesApi && messagesApi.sendOption(optionName);
 	};
 
@@ -34,7 +43,12 @@ const ChatPage = () => {
 		<div className={classes.chatWrapper}>
 			<div className={classes.messages}>
 				{messages?.map((message, index) => (
-					<Message key={index} index={index} text={message} />
+					<Message
+						key={index}
+						index={index}
+						text={message.text}
+						filenames={message.files?.map((file) => file.name)}
+					/>
 				))}
 			</div>
 			<Input

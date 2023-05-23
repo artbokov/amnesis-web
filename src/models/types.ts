@@ -28,8 +28,8 @@ type Message = {
 };
 
 type File = {
-	id: string;
-	name?: string;
+	id?: string;
+	name: string;
 	content_type?: string;
 	size?: number;
 };

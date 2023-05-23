@@ -26,6 +26,10 @@ const Input = ({ onMessageSend, onOptionSend, options }: inputProps) => {
 		setFiles([...files, newFile]);
 	};
 
+	const onFileDetach = (fileIndex: number) => {
+		setFiles(files.filter((file, index) => index !== fileIndex));
+	};
+
 	return (
 		<div className={classes.input}>
 			<div className={classes.textarea}>
@@ -35,7 +39,10 @@ const Input = ({ onMessageSend, onOptionSend, options }: inputProps) => {
 					setMessage={setMessage}
 				/>
 				<FileInput onFileAttach={onFileAttach} />
-				<AttachedFiles filenames={files.map((file) => file.name)} />
+				<AttachedFiles
+					filenames={files.map((file) => file.name)}
+					onFileDetach={onFileDetach}
+				/>
 			</div>
 			<Button
 				onClick={sendMessage}

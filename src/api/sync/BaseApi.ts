@@ -1,4 +1,4 @@
-import { User, RefreshToken, AccessToken, FileId } from "../../models/ApiTypes";
+import { User, RefreshToken, AccessToken, FileId } from "../../models/types";
 
 type Tokens = RefreshToken & AccessToken;
 const BACKEND_URL = "/api";

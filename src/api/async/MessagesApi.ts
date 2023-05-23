@@ -1,5 +1,5 @@
 import baseApi from "../sync/BaseApi";
-import { Message } from "../../models/ApiTypes";
+import { Message } from "../../models/types";
 
 type MessageCallback = (message: Message) => void;
 type HistoryCallback = (history: Message[]) => void;
@@ -45,8 +45,8 @@ class MessagesApi {
 				})
 			);
 
-			this.shouldRqHistoryOnLoad && this.requestHistory();
 			this.isSocketLoaded = true;
+			this.shouldRqHistoryOnLoad && this.requestHistory();
 		};
 
 		this.socket.onmessage = (e) => this.onMessage(e);
