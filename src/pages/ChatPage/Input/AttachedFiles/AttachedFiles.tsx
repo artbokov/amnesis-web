@@ -13,7 +13,7 @@ const AttachedFiles = ({ filenames, onFileDetach }: attachedFilesProps) => {
 				<span key={index} onClick={() => onFileDetach && onFileDetach(index)}>
 					<FileIcon />
 					<span className={classes.text}>
-						{filename.length < 10 ? filename : `${filename.slice(0, 7)}...`}
+						{filename.length < 10 ? filename : `${filename.slice(0, 15)}...`}
 					</span>
 				</span>
 			))}

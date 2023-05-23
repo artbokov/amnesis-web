@@ -83,7 +83,7 @@ $clip-size: 33px;
 			.clipIcon {
 				cursor: pointer;
 				position: absolute;
-				bottom: 0;
+				bottom: 5px;
 				right: 0;
 
 				height: $clip-size;
@@ -91,12 +91,17 @@ $clip-size: 33px;
 
 			.uploadedFiles {
 				position: absolute;
-				bottom: 0;
+				bottom: 5px;
 				left: 10px;
 
 				svg,
 				.text {
+					cursor: pointer;
 					height: $clip-size;
+				}
+				svg:hover + .text,
+				.text:hover {
+					text-decoration: line-through;
 				}
 			}
 		}
