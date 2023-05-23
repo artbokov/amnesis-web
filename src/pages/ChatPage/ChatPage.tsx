@@ -2,26 +2,22 @@ import { useEffect, useState } from "react";
 import Input from "./Input/Input";
 import classes from "./styles.module.scss";
 import classNames from "classnames";
-import { MessagesApi } from "../../api";
+import { messagesApi } from "../../api";
 import AttachedFiles from "./Input/AttachedFiles/AttachedFiles";
 
 const ChatPage = () => {
-	const [messagesApi, setMessagesApi] = useState<MessagesApi | null>(null);
 	const [messages, setMessages] = useState<string[]>([]);
 	const [options, setOptions] = useState<[string, string][]>();
 
 	useEffect(() => {
-		setMessagesApi(
-			new MessagesApi(
-				(history) =>
-					setMessages(history.map((message) => message.text).reverse()),
-				(newMessage) => {
-					setOptions(
-						newMessage.options?.map((option) => [option.name, option.text])
-					);
-					setMessages((history) => [...history, newMessage.text]);
-				}
-			)
+		messagesApi.setMessageCallback((newMessage) => {
+			setOptions(
+				newMessage.options?.map((option) => [option.name, option.text])
+			);
+			setMessages((history) => [...history, newMessage.text]);
+		});
+		messagesApi.setHistoryCallback((history) =>
+			setMessages(history.map((message) => message.text).reverse())
 		);
 	}, []);
 

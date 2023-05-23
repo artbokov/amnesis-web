@@ -24,27 +24,23 @@ class BaseApi {
 				}
 			}, 100);
 
-			// setTimeout(() => this.refresh(), 500);
-			// setTimeout(() => this.signIn(USER), 1000);
 			setTimeout(() => reject("Get AccessToken timeout error"), 1500);
 		});
 	}
 
 	uploadFile(file: File) {
-		return new Promise<FileId>((resolve, reject) => {
-			const fileReader = new FileReader();
+		const formData = new FormData();
+		formData.append("file", file);
 
-			fileReader.readAsBinaryString(file);
-			fileReader.onload = () => {
-				resolve(
-					this.request<FileId>("/upload", {
-						method: "POST",
-						body: JSON.stringify({ file: fileReader.result }),
-					})
-				);
-			};
-			fileReader.onerror = () => reject("uploadFile error");
-		});
+		return this.request<FileId>(
+			"/upload",
+			{
+				method: "POST",
+				body: formData,
+			},
+			true,
+			true
+		);
 	}
 
 	// PRIVATE
@@ -55,18 +51,24 @@ class BaseApi {
 			method: "POST" | "GET";
 			body?: BodyInit;
 		},
-		shouldRefresh = true
+		shouldRefresh = true,
+		shouldRemoveContentType = false
 	) {
 		// Refresh tokens if already signed in
 		shouldRefresh && this.refresh();
 
-		const fetchOptions = {
+		const fetchOptions: {
+			headers: { [header: string]: string };
+		} = {
 			headers: {
-				"Content-Type": "application/json",
+				Accept: "application/json",
 				Authorization: `Bearer ${this.accessToken}`,
 			},
 			...requestOptions,
 		};
+
+		!shouldRemoveContentType &&
+			(fetchOptions.headers["Content-type"] = "application/json");
 
 		return new Promise<responseType>((resolve, reject) => {
 			fetch(`${this.apiUrl}${url}`, fetchOptions)

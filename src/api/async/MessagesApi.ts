@@ -19,20 +19,16 @@ const EVENT_TYPES = {
 };
 
 class MessagesApi {
-	private historyCallback: HistoryCallback | null = null;
-	private messageCallbacks: MessageCallback | null = null;
 	private socket: WebSocket = new WebSocket(WS_URL);
 
-	private lastMessageId: number | null = null;
+	private historyCallback: HistoryCallback | null = null;
+	private messageCallbacks: MessageCallback | null = null;
 
-	constructor(
-		historyCallback: HistoryCallback,
-		messageCallback: MessageCallback
-	) {
-		// Callbacks
-		this.historyCallback = historyCallback;
-		this.messageCallbacks = messageCallback;
+	private isSocketLoaded: boolean = false;
+	private shouldRqHistoryOnLoad: boolean = false;
+	private lastMessageId: string | null = null;
 
+	constructor() {
 		this.setUpSocket();
 	}
 
@@ -49,12 +45,8 @@ class MessagesApi {
 				})
 			);
 
-			// History request
-			this.socket.send(
-				JSON.stringify({
-					event_type: EVENT_TYPES.HISTORY_RQ,
-				})
-			);
+			this.shouldRqHistoryOnLoad && this.requestHistory();
+			this.isSocketLoaded = true;
 		};
 
 		this.socket.onmessage = (e) => this.onMessage(e);
@@ -84,7 +76,7 @@ class MessagesApi {
 					event_type: EVENT_TYPES.SEND_MESSAGE_RQ,
 					message: {
 						text: text,
-						files: filesIds,
+						files: filesIds.map((idObj) => ({ id: idObj.file_id })),
 					},
 				})
 			);
@@ -100,6 +92,27 @@ class MessagesApi {
 			})
 		);
 	}
+
+	setMessageCallback(callback: MessageCallback) {
+		this.messageCallbacks = callback;
+	}
+
+	setHistoryCallback(callback: HistoryCallback) {
+		this.historyCallback = callback;
+	}
+
+	requestHistory() {
+		if (!this.isSocketLoaded) {
+			this.shouldRqHistoryOnLoad = true;
+			return;
+		}
+		this.socket.send(
+			JSON.stringify({
+				event_type: EVENT_TYPES.HISTORY_RQ,
+			})
+		);
+	}
 }
 
-export default MessagesApi;
+const messagesApi = new MessagesApi();
+export default messagesApi;
