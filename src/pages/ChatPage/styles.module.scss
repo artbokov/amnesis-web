@@ -27,7 +27,7 @@ $clip-size: 33px;
 	.messages {
 		// display: flex;
 		// flex-direction: column-reverse;
-
+		overflow-x: hidden;
 		overflow-y: auto;
 
 		font-size: constants.$secondary-font-size;
