@@ -1,17 +1,20 @@
 import { User, RefreshToken, AccessToken, FileId } from "../../models/types";
+import { generateString } from "../../generator";
 
 type Tokens = RefreshToken & AccessToken;
 const BACKEND_URL = "/api";
-const USER = { login: "admin", password: "iwanttodie" };
+const AUTH_STRINGS_LENGTH = 32;
 
 class BaseApi {
 	private apiUrl: string;
 	private accessToken: string | null = null;
 	private refreshToken: string | null = null;
 
+	private user: User | null = null;
+
 	constructor(url: string) {
 		this.apiUrl = url;
-		this.signIn(USER);
+		this.initUser();
 	}
 
 	// PUBLIC
@@ -45,7 +48,7 @@ class BaseApi {
 
 	// PRIVATE
 	// Generic for POST & GET requests
-	private request<responseType>(
+	private request<responseType = never>(
 		url: string,
 		requestOptions: {
 			method: "POST" | "GET";
@@ -73,18 +76,34 @@ class BaseApi {
 		return new Promise<responseType>((resolve, reject) => {
 			fetch(`${this.apiUrl}${url}`, fetchOptions)
 				.then((response) => response.text())
-				.then((text) => resolve(JSON.parse(text)))
+				.then((text) => {
+					// Idk how to compare responseType to never
+					if (text.length) {
+						resolve(JSON.parse(text));
+					}
+					resolve({} as responseType);
+				})
 				.catch((error) => reject(error));
 		});
 	}
 
 	// JWT Logic
-	private signIn(user: User) {
+	private async initUser() {
+		this.user = {
+			login: generateString(AUTH_STRINGS_LENGTH),
+			password: generateString(AUTH_STRINGS_LENGTH),
+		};
+
+		await this.request("/sign-up", {
+			method: "POST",
+			body: JSON.stringify(this.user),
+		});
+
 		this.request<Tokens>(
 			"/sign-in",
 			{
 				method: "POST",
-				body: JSON.stringify(user),
+				body: JSON.stringify(this.user),
 			},
 			false
 		).then((tokens) => this.setTokens(tokens));

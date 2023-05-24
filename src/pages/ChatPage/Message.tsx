@@ -33,7 +33,7 @@ const Message = ({ index, text, files }: messageProps) => {
 							id && (
 								<img
 									height="200"
-									src={`oncoanalitika.com/api/download/${id}`}
+									src={`http://oncoanalitika.com/api/download/${id}`}
 									alt="attachedPhoto"
 								/>
 							)
