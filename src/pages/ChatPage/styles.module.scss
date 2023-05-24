@@ -25,8 +25,6 @@ $clip-size: 33px;
 	height: calc(100vh - constants.$header-vh);
 
 	.messages {
-		// display: flex;
-		// flex-direction: column-reverse;
 		overflow-x: hidden;
 		overflow-y: auto;
 
@@ -36,6 +34,9 @@ $clip-size: 33px;
 
 		.message {
 			@include customPadding($only-left: false);
+			display: flex;
+			flex-direction: column;
+
 			width: constants.$chat-input-width;
 
 			&.green {

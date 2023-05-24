@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import Input from "./Input/Input";
 import classes from "./styles.module.scss";
-import classNames from "classnames";
 import { messagesApi } from "../../api";
-import AttachedFiles from "./Input/AttachedFiles/AttachedFiles";
 import { Message as MessageType } from "../../models/types";
+import Message from "./Message";
 
 const ChatPage = () => {
 	const [messages, setMessages] = useState<MessageType[]>([]);
@@ -17,9 +16,9 @@ const ChatPage = () => {
 			);
 			setMessages((history) => [...history, newMessage]);
 		});
-		messagesApi.setHistoryCallback((history) =>
-			setMessages(history.map((message) => message).reverse())
-		);
+		messagesApi.setHistoryCallback((history) => {
+			setMessages(history.map((message) => message).reverse());
+		});
 		messagesApi.requestHistory();
 	}, []);
 
@@ -28,7 +27,7 @@ const ChatPage = () => {
 			...messages,
 			{
 				text: newMessageText,
-				files: attachedFiles.map((file) => ({ name: file.name })),
+				files: attachedFiles,
 			},
 		]);
 		messagesApi && messagesApi.sendMessage(newMessageText, attachedFiles);
@@ -47,7 +46,7 @@ const ChatPage = () => {
 						key={index}
 						index={index}
 						text={message.text}
-						filenames={message.files?.map((file) => file.name)}
+						files={message.files}
 					/>
 				))}
 			</div>
@@ -56,23 +55,6 @@ const ChatPage = () => {
 				onMessageSend={onMessageSend}
 				onOptionSend={onOptionSend}
 			/>
-		</div>
-	);
-};
-
-const Message = ({
-	index,
-	text,
-	filenames,
-}: {
-	index: number;
-	text: string;
-	filenames?: string[];
-}) => {
-	return (
-		<div className={classNames(index % 2 && classes.green, classes.message)}>
-			{text}
-			{filenames && <AttachedFiles filenames={filenames} />}
 		</div>
 	);
 };

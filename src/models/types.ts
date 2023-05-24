@@ -39,4 +39,4 @@ type Option = {
 	text: string;
 };
 
-export type { User, AccessToken, RefreshToken, Message, FileId };
+export type { User, AccessToken, RefreshToken, Message, FileId, File };

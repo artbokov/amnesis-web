@@ -39,10 +39,7 @@ const Input = ({ onMessageSend, onOptionSend, options }: inputProps) => {
 					setMessage={setMessage}
 				/>
 				<FileInput onFileAttach={onFileAttach} />
-				<AttachedFiles
-					filenames={files.map((file) => file.name)}
-					onFileDetach={onFileDetach}
-				/>
+				<AttachedFiles files={files} onFileDetach={onFileDetach} />
 			</div>
 			<Button
 				onClick={sendMessage}

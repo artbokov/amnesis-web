@@ -55,7 +55,7 @@ class BaseApi {
 		shouldRemoveContentType = false
 	) {
 		// Refresh tokens if already signed in
-		shouldRefresh && this.refresh();
+		// shouldRefresh && this.refresh();
 
 		const fetchOptions: {
 			headers: { [header: string]: string };

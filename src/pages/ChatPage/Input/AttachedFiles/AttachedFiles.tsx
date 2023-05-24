@@ -1,20 +1,29 @@
 import classes from "../../styles.module.scss";
 import { ReactComponent as FileIcon } from "../../../../assets/fileIcon.svg";
+import { File } from "../../../../models/types";
 
 type attachedFilesProps = {
-	filenames: string[];
+	files: File[];
 	onFileDetach?: (index: number) => void;
+	couldDownload?: true;
 };
 
-const AttachedFiles = ({ filenames, onFileDetach }: attachedFilesProps) => {
+const AttachedFiles = ({
+	files,
+	onFileDetach,
+	couldDownload = undefined,
+}: attachedFilesProps) => {
 	return (
 		<div className={classes.uploadedFiles}>
-			{filenames.map((filename, index) => (
+			{files.map((file, index) => (
 				<span key={index} onClick={() => onFileDetach && onFileDetach(index)}>
 					<FileIcon />
-					<span className={classes.text}>
-						{filename.length < 10 ? filename : `${filename.slice(0, 15)}...`}
-					</span>
+					<a
+						className={classes.text}
+						href={couldDownload && `oncoanalitika.com/api/download/${file.id}`}
+					>
+						{file.name.length < 10 ? file.name : `${file.name.slice(0, 15)}...`}
+					</a>
 				</span>
 			))}
 		</div>
