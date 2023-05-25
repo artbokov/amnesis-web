@@ -32,7 +32,7 @@ const ChatPage = () => {
 	};
 
 	const onOptionSend = (optionName: string, optionText: string) => {
-		setMessages([...messages, { text: optionText }]);
+		setMessages([{ text: optionText }, ...messages]);
 		messagesApi && messagesApi.sendOption(optionName);
 		setOptions([]);
 	};
