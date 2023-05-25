@@ -37,11 +37,14 @@ $clip-size: 33px;
 			display: flex;
 			flex-direction: column;
 
-			width: constants.$chat-input-width;
+			@media screen and (min-width: constants.$phone-width-breakpoint) {
+				width: constants.$chat-input-width;
+			}
 
 			.message_text {
 				white-space: pre-line;
-				margin: constants.$margin-to-bottom-of-message-text-and-files 0 constants.$margin-to-bottom-of-message-text-and-files 0;
+				margin: constants.$margin-to-bottom-of-message-text-and-files 0
+					constants.$margin-to-bottom-of-message-text-and-files 0;
 			}
 
 			&.green {
@@ -55,15 +58,22 @@ $clip-size: 33px;
 
 		position: relative;
 
-		display: grid;
-		grid-template-columns: constants.$chat-input-width $button-width;
-		grid-template-rows: repeat(3, 1fr);
-		gap: $grid-vertical-gap $grid-horizontal-gap;
+		@media screen and (max-width: constants.$phone-width-breakpoint) {
+			display: flex;
+			flex-direction: column;
+		}
+		@media screen and (min-width: constants.$phone-width-breakpoint) {
+			display: grid;
+			grid-template-columns: constants.$chat-input-width $button-width;
+			grid-template-rows: repeat(3, 1fr);
 
-		width: max(
-			calc(100vw - $horizontal-padding),
-			calc(constants.$chat-input-width + $button-width + $grid-horizontal-gap)
-		);
+			width: max(
+				calc(100vw - $horizontal-padding),
+				calc(constants.$chat-input-width + $button-width + $grid-horizontal-gap)
+			);
+		}
+
+		gap: $grid-vertical-gap $grid-horizontal-gap;
 		min-height: $input-height;
 
 		align-self: flex-end;

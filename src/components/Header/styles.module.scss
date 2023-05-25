@@ -18,7 +18,12 @@
 	font-weight: constants.$primary-font-weight;
 
 	.companyName {
-		position: absolute;
+		@media screen and (min-width: constants.$phone-width-breakpoint) {
+			position: absolute;
+		}
+		@media screen and (max-width: constants.$phone-width-breakpoint) {
+			display: none;
+		}
 		left: 120px;
 	}
 }
