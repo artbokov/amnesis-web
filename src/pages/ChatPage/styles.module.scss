@@ -22,7 +22,9 @@ $clip-size: 33px;
 
 .chatWrapper {
 	display: grid;
+
 	height: calc(100vh - constants.$header-vh);
+	width: 100vw;
 
 	.messages {
 		display: flex;
@@ -140,7 +142,7 @@ $clip-size: 33px;
 	width: calc(100% - $clip-size);
 
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 
 	gap: $files-horizontal-gap;
 
