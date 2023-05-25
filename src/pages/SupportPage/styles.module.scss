@@ -20,6 +20,11 @@ $questions-block-title-font-size: 40px;
 	.questionTitle {
 		font-size: $questions-block-title-font-size;
 		line-height: $questions-block-title-font-size;
+
+		@media screen and (max-width: constants.$phone-width-breakpoint) {
+			font-size: constants.$phone-primary-font-size;
+			line-height: constants.$phone-primary-font-size;
+		}
 	}
 }
 
@@ -30,6 +35,9 @@ $questions-block-title-font-size: 40px;
 
 	@media screen and (min-width: constants.$phone-width-breakpoint) {
 		width: $questions-block-width;
+	}
+	@media screen and (max-width: constants.$phone-width-breakpoint) {
+		width: calc(100vw - 2 * constants.$horizontal-margin-for-phone);
 	}
 
 	.col {
