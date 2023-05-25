@@ -13,7 +13,10 @@ $path-width: calc(
 );
 
 .summary {
-	width: $info-block-width;
+	@media screen and (min-width: constants.$phone-width-breakpoint) {
+		width: $info-block-width;
+	}
+
 	color: constants.$dark-blue;
 
 	padding-top: $info-padding-top;
@@ -23,24 +26,8 @@ $path-width: calc(
 }
 
 .guide {
-	width: $guide-block-width;
-
-	table {
-		width: 100%;
-		margin-top: 10px;
-
-		text-align: center;
-
-		&,
-		td {
-			border: 1px solid constants.$text;
-			border-collapse: collapse;
-		}
-
-		td {
-			height: 50px;
-			width: 50%;
-		}
+	@media screen and (min-width: constants.$phone-width-breakpoint) {
+		width: $guide-block-width;
 	}
 
 	.step {
@@ -57,67 +44,92 @@ $path-width: calc(
 			z-index: constants.$content-z;
 		}
 
-		.path {
-			position: absolute;
-
-			top: calc(50% - $path-border);
-
-			height: 0;
-			width: $path-width;
-
-			z-index: constants.$background-z;
-
-			border: $path-border solid constants.$blue;
-
-			align-self: flex-start;
-			justify-self: center;
-		}
-
-		.mainPath {
-			position: absolute;
-
-			top: 0;
-
-			height: 100%;
-			width: 0;
-
-			z-index: constants.$background-z;
-
-			border-left: $path-border solid constants.$blue;
-			border-right: $path-border solid constants.$blue;
-		}
-
-		&.left {
-			align-self: flex-start;
-
+		@media screen and (min-width: constants.$phone-width-breakpoint) {
 			.path {
-				margin-left: $guide-step-width - $guide-step-padding;
+				position: absolute;
+
+				top: calc(50% - $path-border);
+
+				height: 0;
+				width: $path-width;
+
+				z-index: constants.$background-z;
+
+				border: $path-border solid constants.$blue;
+
+				align-self: flex-start;
+				justify-self: center;
 			}
 
 			.mainPath {
-				margin-left: calc(
-					$guide-block-width / 2 - $path-border / 2 - $guide-step-padding
-				);
+				position: absolute;
+
+				top: 0;
+
+				height: 100%;
+				width: 0;
+
+				z-index: constants.$background-z;
+
+				border-left: $path-border solid constants.$blue;
+				border-right: $path-border solid constants.$blue;
+			}
+
+			&.left {
+				align-self: flex-start;
+
+				.path {
+					margin-left: $guide-step-width - $guide-step-padding;
+				}
+
+				.mainPath {
+					margin-left: calc(
+						$guide-block-width / 2 - $path-border / 2 - $guide-step-padding
+					);
+				}
+			}
+
+			&.right {
+				align-self: flex-end;
+
+				.path {
+					margin-left: -$guide-step-padding - $path-border * 2 - $path-width;
+				}
+
+				.mainPath {
+					margin-left: calc(
+						-1 * ($guide-step-padding + $path-border / 2 + $path-width + 2 *
+									$path-border)
+					);
+				}
 			}
 		}
 
-		&.right {
-			align-self: flex-end;
+		table {
+			width: 100%;
+			margin-top: 10px;
 
-			.path {
-				margin-left: -$guide-step-padding - $path-border * 2 - $path-width;
+			text-align: center;
+
+			&,
+			td {
+				border: 1px solid constants.$text;
+				border-collapse: collapse;
 			}
 
-			.mainPath {
-				margin-left: calc(
-					-1 * ($guide-step-padding + $path-border / 2 + $path-width + 2 *
-								$path-border)
-				);
+			td {
+				height: 50px;
+				width: 50%;
 			}
 		}
 	}
 }
 
-// .howItWorks {
-
-// }
+.howItWorks {
+	@media screen and (max-width: constants.$phone-width-breakpoint) {
+		svg {
+			width: calc(100vw - 2 * constants.$horizontal-margin-for-phone);
+			height: auto;
+		}
+	}
+}

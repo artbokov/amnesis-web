@@ -39,6 +39,8 @@ $outer-gap: 60px;
 	padding-bottom: $padding-bottom; // to create some space in the bottom
 
 	@media screen and (max-width: constants.$phone-width-breakpoint) {
+		width: calc(100vw - 2 * constants.$horizontal-margin-for-phone);
+
 		padding-left: constants.$horizontal-margin-for-phone;
 		padding-right: constants.$horizontal-margin-for-phone;
 	}
