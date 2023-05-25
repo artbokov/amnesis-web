@@ -25,8 +25,11 @@ $clip-size: 33px;
 	height: calc(100vh - constants.$header-vh);
 
 	.messages {
+		display: flex;
+		flex-direction: column-reverse;
+
 		overflow-x: hidden;
-		overflow-y: auto;
+		overflow-y: scroll;
 
 		font-size: constants.$secondary-font-size;
 		font-weight: constants.$secondary-font-weight;
@@ -36,6 +39,8 @@ $clip-size: 33px;
 			@include customPadding($only-left: false);
 			display: flex;
 			flex-direction: column;
+
+			height: fit-content;
 
 			@media screen and (min-width: constants.$phone-width-breakpoint) {
 				width: constants.$chat-input-width;
