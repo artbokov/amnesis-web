@@ -6,7 +6,7 @@ import FileInput from "./FileInput/FileInput";
 import AttachedFiles from "./AttachedFiles/AttachedFiles";
 
 type inputProps = {
-	onOptionSend: (optionName: string) => void;
+	onOptionSend: (optionName: string, optionText: string) => void;
 	onMessageSend: (newMessage: string, attachedFiles: File[]) => void;
 	options: [string, string][];
 };
@@ -47,7 +47,7 @@ const Input = ({ onMessageSend, onOptionSend, options }: inputProps) => {
 				optionalClasses={[!!options.length && "disabled"]}
 			/>
 			{options.map((option) => (
-				<Button onClick={() => onOptionSend(option[0])} text={option[1]} />
+				<Button onClick={() => onOptionSend(option[0], option[1])} text={option[1]} />
 			))}
 		</div>
 	);

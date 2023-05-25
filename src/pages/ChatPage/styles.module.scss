@@ -41,10 +41,7 @@ $clip-size: 33px;
 
 			.message_text {
 				white-space: pre-line;
-				margin-top: constants.$margin-to-bottom-of-message-text;
-				margin-bottom: constants.$margin-to-bottom-of-message-text;
-				margin-left: 0px;
-				margin-right: 0px;
+				margin: constants.$margin-to-bottom-of-message-text-and-files 0 constants.$margin-to-bottom-of-message-text-and-files 0;
 			}
 
 			&.green {

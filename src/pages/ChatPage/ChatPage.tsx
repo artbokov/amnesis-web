@@ -33,9 +33,10 @@ const ChatPage = () => {
 		messagesApi && messagesApi.sendMessage(newMessageText, attachedFiles);
 	};
 
-	const onOptionSend = (optionName: string) => {
-		setMessages([...messages, { text: optionName }]);
+	const onOptionSend = (optionName: string, optionText: string) => {
+		setMessages([...messages, { text: optionText }]);
 		messagesApi && messagesApi.sendOption(optionName);
+		setOptions([]);
 	};
 
 	return (
