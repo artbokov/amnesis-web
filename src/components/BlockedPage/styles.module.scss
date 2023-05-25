@@ -17,6 +17,10 @@ $outer-gap: 60px;
 		text-align: center;
 		font-size: constants.$header-font-size;
 
+		@media screen and (max-width: constants.$phone-width-breakpoint) {
+			font-size: constants.$phone-header-font-size;
+		}
+
 		span {
 			color: constants.$green;
 		}
@@ -27,9 +31,17 @@ $outer-gap: 60px;
 	@include vertical-flexbox($outer-gap);
 	position: absolute;
 
-	width: 100vw;
+	@media screen and (min-width: constants.$phone-width-breakpoint) {
+		width: 100vw;
+	}
+
 	padding-top: $padding-top;
 	padding-bottom: $padding-bottom; // to create some space in the bottom
+
+	@media screen and (max-width: constants.$phone-width-breakpoint) {
+		padding-left: constants.$horizontal-margin-for-phone;
+		padding-right: constants.$horizontal-margin-for-phone;
+	}
 
 	align-items: center;
 

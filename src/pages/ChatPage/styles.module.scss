@@ -40,6 +40,9 @@ $clip-size: 33px;
 			@media screen and (min-width: constants.$phone-width-breakpoint) {
 				width: constants.$chat-input-width;
 			}
+			@media screen and (max-width: constants.$phone-width-breakpoint) {
+				margin: 0 constants.$horizontal-margin-for-phone;
+			}
 
 			.message_text {
 				white-space: pre-line;
@@ -61,20 +64,23 @@ $clip-size: 33px;
 		@media screen and (max-width: constants.$phone-width-breakpoint) {
 			display: flex;
 			flex-direction: column;
+
+			padding-left: constants.$horizontal-margin-for-phone;
+			padding-right: constants.$horizontal-margin-for-phone;
 		}
 		@media screen and (min-width: constants.$phone-width-breakpoint) {
 			display: grid;
 			grid-template-columns: constants.$chat-input-width $button-width;
-			grid-template-rows: repeat(3, 1fr);
+			grid-template-rows: repeat(4, 1fr);
 
 			width: max(
 				calc(100vw - $horizontal-padding),
 				calc(constants.$chat-input-width + $button-width + $grid-horizontal-gap)
 			);
+			min-height: $input-height;
 		}
 
 		gap: $grid-vertical-gap $grid-horizontal-gap;
-		min-height: $input-height;
 
 		align-self: flex-end;
 
@@ -85,7 +91,7 @@ $clip-size: 33px;
 		.textarea {
 			position: relative;
 			grid-column: 1;
-			grid-row: 1 / 4;
+			grid-row: 1 / 5;
 
 			textarea {
 				width: calc(100% - 8px); // to compensate border and margin

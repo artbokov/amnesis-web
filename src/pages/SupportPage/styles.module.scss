@@ -1,3 +1,5 @@
+@use "../../utils/constants";
+
 $questions-block-width: 920px;
 $questions-block-title-font-size: 40px;
 
@@ -6,7 +8,9 @@ $questions-block-title-font-size: 40px;
 }
 
 .questions {
-	width: $questions-block-width;
+	@media screen and (min-width: constants.$phone-width-breakpoint) {
+		width: $questions-block-width;
+	}
 	line-height: 22px;
 
 	.title {
@@ -15,6 +19,7 @@ $questions-block-title-font-size: 40px;
 
 	.questionTitle {
 		font-size: $questions-block-title-font-size;
+		line-height: $questions-block-title-font-size;
 	}
 }
 
@@ -23,7 +28,9 @@ $questions-block-title-font-size: 40px;
 	flex-direction: row;
 	justify-content: space-between;
 
-	width: $questions-block-width;
+	@media screen and (min-width: constants.$phone-width-breakpoint) {
+		width: $questions-block-width;
+	}
 
 	.col {
 		display: flex;
