@@ -25,7 +25,7 @@ const Message = ({ index, text, files }: messageProps) => {
 
 	return (
 		<div className={classNames(index % 2 && classes.green, classes.message)}>
-			<div className={classes.messageText}>{text}</div>
+			<div className={classes.messageText}><p className={classes.message_text}>{text}</p></div>
 			<div className={classes.messagePhoto}>
 				{pictureIds &&
 					pictureIds.map(
@@ -33,7 +33,7 @@ const Message = ({ index, text, files }: messageProps) => {
 							id && (
 								<img
 									height="200"
-									src={`http://oncoanalitika.com/api/download/${id}`}
+									src={`/api/download/${id}`}
 									alt="attachedPhoto"
 								/>
 							)

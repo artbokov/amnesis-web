@@ -39,6 +39,14 @@ $clip-size: 33px;
 
 			width: constants.$chat-input-width;
 
+			.message_text {
+				white-space: pre-line;
+				margin-top: constants.$margin-to-bottom-of-message-text;
+				margin-bottom: constants.$margin-to-bottom-of-message-text;
+				margin-left: 0px;
+				margin-right: 0px;
+			}
+
 			&.green {
 				background: constants.$light-green;
 			}
