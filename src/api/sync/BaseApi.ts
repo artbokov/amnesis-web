@@ -2,7 +2,7 @@ import { User, RefreshToken, AccessToken, FileId } from "../../models/types";
 import { generateString } from "../../generator";
 
 type Tokens = RefreshToken & AccessToken;
-const BACKEND_URL = "/api";
+const BACKEND_URL = "api.old.oncoanalitika.com";
 const AUTH_STRINGS_LENGTH = 32;
 
 class BaseApi {
