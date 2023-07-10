@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -47,5 +47,5 @@
     "react-router-dom": "^6.10.0",
     "sass-loader": "^13.2.2"
   },
-  "proxy": "http://oncoanalitika.com"
+  "proxy": "https://old.oncoanalitika.com"
 }

@@ -4,7 +4,7 @@ import { Message } from "../../models/types";
 type MessageCallback = (message: Message) => void;
 type HistoryCallback = (history: Message[]) => void;
 
-const WS_URL = "ws://oncoanalitika.com/api/connect";
+const WS_URL = "wss://api.old.oncoanalitika.com/connect";
 const EVENT_TYPES = {
 	// Requests
 	AUTH_RQ: "AuthRq",
