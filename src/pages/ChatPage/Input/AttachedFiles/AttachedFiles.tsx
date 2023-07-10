@@ -20,7 +20,7 @@ const AttachedFiles = ({
 					<FileIcon />
 					<a
 						className={classes.text}
-						href={couldDownload && `api.old.oncoanalitika.com/download/${file.id}`}
+						href={couldDownload && `https://api.old.oncoanalitika.com/download/${file.id}`}
 					>
 						{file.name.length < 10 ? file.name : `${file.name.slice(0, 15)}...`}
 					</a>
