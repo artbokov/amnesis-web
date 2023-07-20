@@ -1,29 +1,29 @@
 @use "../../utils/constants";
 
 .header {
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	height: constants.$header-vh;
-	width: 100vw;
+  height: constants.$header-vh;
+  width: 100vw;
 
-	z-index: constants.$interface-z;
+  z-index: constants.$interface-z;
 
-	background-color: constants.$green;
-	color: constants.$text;
+  background-color: constants.$green;
+  color: constants.$text;
 
-	font-size: constants.$primary-font-size;
-	font-weight: constants.$primary-font-weight;
+  font-size: constants.$primary-font-size;
+  font-weight: constants.$primary-font-weight;
 
-	.companyName {
-		@media screen and (min-width: constants.$phone-width-breakpoint) {
-			position: absolute;
-		}
-		@media screen and (max-width: constants.$phone-width-breakpoint) {
-			display: none;
-		}
-		left: 120px;
-	}
+  .companyName {
+    @media screen and (min-width: constants.$phone-width-breakpoint) {
+      position: absolute;
+    }
+    @media screen and (max-width: constants.$phone-width-breakpoint) {
+      display: none;
+    }
+    left: 120px;
+  }
 }

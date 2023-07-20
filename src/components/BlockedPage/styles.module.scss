@@ -7,48 +7,48 @@ $inner-gap: 30px;
 $outer-gap: 60px;
 
 @mixin vertical-flexbox($gap) {
-	display: flex;
-	flex-direction: column;
-	gap: $gap;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
 }
 
 @mixin with-title {
-	.title {
-		text-align: center;
-		font-size: constants.$header-font-size;
+  .title {
+    text-align: center;
+    font-size: constants.$header-font-size;
 
-		@media screen and (max-width: constants.$phone-width-breakpoint) {
-			font-size: constants.$phone-header-font-size;
-		}
+    @media screen and (max-width: constants.$phone-width-breakpoint) {
+      font-size: constants.$phone-header-font-size;
+    }
 
-		span {
-			color: constants.$green;
-		}
-	}
+    span {
+      color: constants.$green;
+    }
+  }
 }
 
 .wrapper {
-	@include vertical-flexbox($outer-gap);
-	position: absolute;
+  @include vertical-flexbox($outer-gap);
+  position: absolute;
 
-	@media screen and (min-width: constants.$phone-width-breakpoint) {
-		width: 100vw;
-	}
+  @media screen and (min-width: constants.$phone-width-breakpoint) {
+    width: 100vw;
+  }
 
-	padding-top: $padding-top;
-	padding-bottom: $padding-bottom; // to create some space in the bottom
+  padding-top: $padding-top;
+  padding-bottom: $padding-bottom; // to create some space in the bottom
 
-	@media screen and (max-width: constants.$phone-width-breakpoint) {
-		width: calc(100vw - 2 * constants.$horizontal-margin-for-phone);
+  @media screen and (max-width: constants.$phone-width-breakpoint) {
+    width: calc(100vw - 2 * constants.$horizontal-margin-for-phone);
 
-		padding-left: constants.$horizontal-margin-for-phone;
-		padding-right: constants.$horizontal-margin-for-phone;
-	}
+    padding-left: constants.$horizontal-margin-for-phone;
+    padding-right: constants.$horizontal-margin-for-phone;
+  }
 
-	align-items: center;
+  align-items: center;
 
-	& > div {
-		@include vertical-flexbox($inner-gap);
-		@include with-title();
-	}
+  & > div {
+    @include vertical-flexbox($inner-gap);
+    @include with-title();
+  }
 }

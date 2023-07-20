@@ -9,127 +9,127 @@ $guide-step-padding: 10px;
 
 $path-border: 4px;
 $path-width: calc(
-	$guide-block-width / 2 - $guide-step-width - 2 * $path-border
+  $guide-block-width / 2 - $guide-step-width - 2 * $path-border
 );
 
 .summary {
-	@media screen and (min-width: constants.$phone-width-breakpoint) {
-		width: $info-block-width;
-	}
+  @media screen and (min-width: constants.$phone-width-breakpoint) {
+    width: $info-block-width;
+  }
 
-	color: constants.$dark-blue;
+  color: constants.$dark-blue;
 
-	padding-top: $info-padding-top;
+  padding-top: $info-padding-top;
 
-	text-align: center;
-	align-items: center;
+  text-align: center;
+  align-items: center;
 }
 
 .guide {
-	@media screen and (min-width: constants.$phone-width-breakpoint) {
-		width: $guide-block-width;
-	}
+  @media screen and (min-width: constants.$phone-width-breakpoint) {
+    width: $guide-block-width;
+  }
 
-	.step {
-		position: relative;
+  .step {
+    position: relative;
 
-		width: $guide-step-width - 2 * $guide-step-padding;
-		padding: $guide-step-padding;
+    width: $guide-step-width - 2 * $guide-step-padding;
+    padding: $guide-step-padding;
 
-		background-color: constants.$blue;
-		color: constants.$text;
+    background-color: constants.$blue;
+    color: constants.$text;
 
-		.content {
-			position: relative;
-			z-index: constants.$content-z;
-		}
+    .content {
+      position: relative;
+      z-index: constants.$content-z;
+    }
 
-		@media screen and (min-width: constants.$phone-width-breakpoint) {
-			.path {
-				position: absolute;
+    @media screen and (min-width: constants.$phone-width-breakpoint) {
+      .path {
+        position: absolute;
 
-				top: calc(50% - $path-border);
+        top: calc(50% - $path-border);
 
-				height: 0;
-				width: $path-width;
+        height: 0;
+        width: $path-width;
 
-				z-index: constants.$background-z;
+        z-index: constants.$background-z;
 
-				border: $path-border solid constants.$blue;
+        border: $path-border solid constants.$blue;
 
-				align-self: flex-start;
-				justify-self: center;
-			}
+        align-self: flex-start;
+        justify-self: center;
+      }
 
-			.mainPath {
-				position: absolute;
+      .mainPath {
+        position: absolute;
 
-				top: 0;
+        top: 0;
 
-				height: 100%;
-				width: 0;
+        height: 100%;
+        width: 0;
 
-				z-index: constants.$background-z;
+        z-index: constants.$background-z;
 
-				border-left: $path-border solid constants.$blue;
-				border-right: $path-border solid constants.$blue;
-			}
+        border-left: $path-border solid constants.$blue;
+        border-right: $path-border solid constants.$blue;
+      }
 
-			&.left {
-				align-self: flex-start;
+      &.left {
+        align-self: flex-start;
 
-				.path {
-					margin-left: $guide-step-width - $guide-step-padding;
-				}
+        .path {
+          margin-left: $guide-step-width - $guide-step-padding;
+        }
 
-				.mainPath {
-					margin-left: calc(
-						$guide-block-width / 2 - $path-border / 2 - $guide-step-padding
-					);
-				}
-			}
+        .mainPath {
+          margin-left: calc(
+            $guide-block-width / 2 - $path-border / 2 - $guide-step-padding
+          );
+        }
+      }
 
-			&.right {
-				align-self: flex-end;
+      &.right {
+        align-self: flex-end;
 
-				.path {
-					margin-left: -$guide-step-padding - $path-border * 2 - $path-width;
-				}
+        .path {
+          margin-left: -$guide-step-padding - $path-border * 2 - $path-width;
+        }
 
-				.mainPath {
-					margin-left: calc(
-						-1 * ($guide-step-padding + $path-border / 2 + $path-width + 2 *
-									$path-border)
-					);
-				}
-			}
-		}
+        .mainPath {
+          margin-left: calc(
+            -1 * ($guide-step-padding + $path-border / 2 + $path-width + 2 *
+                  $path-border)
+          );
+        }
+      }
+    }
 
-		table {
-			width: 100%;
-			margin-top: 10px;
+    table {
+      width: 100%;
+      margin-top: 10px;
 
-			text-align: center;
+      text-align: center;
 
-			&,
-			td {
-				border: 1px solid constants.$text;
-				border-collapse: collapse;
-			}
+      &,
+      td {
+        border: 1px solid constants.$text;
+        border-collapse: collapse;
+      }
 
-			td {
-				height: 50px;
-				width: 50%;
-			}
-		}
-	}
+      td {
+        height: 50px;
+        width: 50%;
+      }
+    }
+  }
 }
 
 .howItWorks {
-	@media screen and (max-width: constants.$phone-width-breakpoint) {
-		svg {
-			width: calc(100vw - 2 * constants.$horizontal-margin-for-phone);
-			height: auto;
-		}
-	}
+  @media screen and (max-width: constants.$phone-width-breakpoint) {
+    svg {
+      width: calc(100vw - 2 * constants.$horizontal-margin-for-phone);
+      height: auto;
+    }
+  }
 }
