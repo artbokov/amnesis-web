@@ -4,7 +4,7 @@ import CustomLink from "../CustomLink/CustomLink";
 
 const links = [
   {
-    path: "/",
+    path: "/info",
     text: "О нас",
   },
   {

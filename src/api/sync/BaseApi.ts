@@ -1,8 +1,8 @@
 import { User, RefreshToken, AccessToken, FileId } from "../../models/types";
-import { generateString } from "../../generator";
+import { generateString } from "../../utils/generator";
 
 type Tokens = RefreshToken & AccessToken;
-const BACKEND_URL = "https://api.old.oncoanalitika.com";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL!;
 const AUTH_STRINGS_LENGTH = 32;
 
 class BaseApi {
