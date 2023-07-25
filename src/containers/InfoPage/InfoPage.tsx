@@ -1,5 +1,5 @@
 import classes from "./styles.module.scss";
-import { BlockedPage, CustomLink } from "../../components";
+import { BlockedPage, NavigationLink as Link } from "../../components";
 import { ReactComponent as HowItWorksScheme } from "../../assets/sheme.svg";
 
 const InfoPage = () => <BlockedPage blocks={blocks} />;
@@ -45,12 +45,7 @@ const blocks = [
         решений, назначает наиболее релевантую для пациента терапию. Назначение
         терапии базируется на рекомендациях Министерства Здравоохранения РФ.
       </span>,
-      <CustomLink
-        key={"summary_2"}
-        text="Перейти к чату"
-        navigateTo="/chat"
-        isActive={true}
-      />,
+      <Link key={"summary_2"} text="Перейти к чату" navigateTo="/chat" />,
     ],
   },
   {

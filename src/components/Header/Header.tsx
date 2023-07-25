@@ -1,6 +1,5 @@
-import { useLocation } from "react-router-dom";
 import classes from "./styles.module.scss";
-import CustomLink from "../CustomLink/CustomLink";
+import { NavigationLink as Link } from "../index";
 
 const links = [
   {
@@ -18,18 +17,11 @@ const links = [
 ];
 
 const Header = () => {
-  const location = useLocation();
-
   return (
     <header className={classes.header}>
       <span className={classes.companyName}> AnaVIT </span>
-      {links.map((link) => (
-        <CustomLink
-          key={link.path}
-          text={link.text}
-          navigateTo={link.path}
-          isActive={link.path === location.pathname}
-        />
+      {links.map((i) => (
+        <Link key={i.path} text={i.text} navigateTo={i.path} />
       ))}
     </header>
   );

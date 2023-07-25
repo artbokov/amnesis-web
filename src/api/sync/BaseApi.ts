@@ -1,9 +1,7 @@
 import { User, RefreshToken, AccessToken, FileId } from "../../models/types";
-import { generateString } from "../../utils/generator";
 
 type Tokens = RefreshToken & AccessToken;
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL!;
-const AUTH_STRINGS_LENGTH = 32;
 
 class BaseApi {
   private apiUrl: string;
@@ -90,8 +88,8 @@ class BaseApi {
   // JWT Logic
   private async initUser() {
     this.user = {
-      login: generateString(AUTH_STRINGS_LENGTH),
-      password: generateString(AUTH_STRINGS_LENGTH),
+      login: "321",
+      password: "321",
     };
 
     await this.request("/sign-up", {
