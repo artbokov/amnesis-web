@@ -15,6 +15,47 @@ class BaseApi {
     this.initUser();
   }
 
+  // PRIVATE
+  // Generic for POST & GET requests
+  private request<responseType = never>(
+    url: string,
+    requestOptions: {
+      method: "POST" | "GET";
+      body?: BodyInit;
+    },
+    shouldRefresh = true,
+    shouldRemoveContentType = false
+  ) {
+    // Refresh tokens if already signed in
+    // shouldRefresh && this.refresh();
+
+    const fetchOptions: {
+      headers: { [header: string]: string };
+    } = {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+      ...requestOptions,
+    };
+
+    !shouldRemoveContentType &&
+      (fetchOptions.headers["Content-type"] = "application/json");
+
+    return new Promise<responseType>((resolve, reject) => {
+      fetch(`${this.apiUrl}${url}`, fetchOptions)
+        .then((response) => response.text())
+        .then((text) => {
+          // Idk how to compare responseType to never
+          if (text.length) {
+            resolve(JSON.parse(text));
+          }
+          resolve({} as responseType);
+        })
+        .catch((error) => reject(error));
+    });
+  }
+
   // PUBLIC
   async getAccessToken() {
     return new Promise<string>((resolve, reject) => {
@@ -76,47 +117,6 @@ class BaseApi {
     await this.request("/sign-up", {
       method: "POST",
       body: JSON.stringify(user),
-    });
-  }
-
-  // PRIVATE
-  // Generic for POST & GET requests
-  private request<responseType = never>(
-    url: string,
-    requestOptions: {
-      method: "POST" | "GET";
-      body?: BodyInit;
-    },
-    shouldRefresh = true,
-    shouldRemoveContentType = false
-  ) {
-    // Refresh tokens if already signed in
-    // shouldRefresh && this.refresh();
-
-    const fetchOptions: {
-      headers: { [header: string]: string };
-    } = {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${this.accessToken}`,
-      },
-      ...requestOptions,
-    };
-
-    !shouldRemoveContentType &&
-      (fetchOptions.headers["Content-type"] = "application/json");
-
-    return new Promise<responseType>((resolve, reject) => {
-      fetch(`${this.apiUrl}${url}`, fetchOptions)
-        .then((response) => response.text())
-        .then((text) => {
-          // Idk how to compare responseType to never
-          if (text.length) {
-            resolve(JSON.parse(text));
-          }
-          resolve({} as responseType);
-        })
-        .catch((error) => reject(error));
     });
   }
 
