@@ -44,6 +44,25 @@ class BaseApi {
     );
   }
 
+  async signin(user: { login: string; password: string; }) {
+    const tokens = await this.request<Tokens>(
+      "/sign-in",
+      {
+        method: "POST",
+        body: JSON.stringify(user),
+      },
+      false
+    );
+    this.setTokens(tokens);
+  }
+
+  async signup(user: { login: string; password: string }) {
+    await this.request("/sign-up", {
+      method: "POST",
+      body: JSON.stringify(user),
+    });
+  }
+
   // PRIVATE
   // Generic for POST & GET requests
   private request<responseType = never>(
