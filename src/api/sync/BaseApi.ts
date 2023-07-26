@@ -44,6 +44,22 @@ class BaseApi {
     );
   }
 
+  async getCurrentUser(): Promise<User> {
+    return await this.request<User>(
+      "/get-current-user",
+      {
+        method: "GET",
+      },
+      false,
+      false
+    );
+  }
+
+  async signout() {
+    this.accessToken = null;
+    this.refreshToken = null;
+  }
+
   async signin(user: User) {
     const tokens = await this.request<Tokens>(
       "/sign-in",
