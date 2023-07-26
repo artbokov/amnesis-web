@@ -2,6 +2,9 @@ import { Navigate, NonIndexRouteObject } from "react-router-dom";
 import InfoPage from "../InfoPage/InfoPage";
 import ChatPage from "../ChatPage/ChatPage";
 import SupportPage from "../SupportPage/SupportPage";
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
+import PasswordResetPage from "../PasswordResetPage/PasswordResetPage";
 
 interface Route extends NonIndexRouteObject {
   isPrivate?: boolean;
@@ -14,11 +17,15 @@ const routes: Route[] = [
   },
   {
     path: "/login",
-    element: <></>,
+    element: <LoginPage />,
   },
   {
     path: "/register",
-    element: <></>,
+    element: <RegisterPage />,
+  },
+  {
+    path: "/password-reset",
+    element: <PasswordResetPage />
   },
   {
     path: "/",
