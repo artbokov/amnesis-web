@@ -44,7 +44,7 @@ class BaseApi {
     );
   }
 
-  async signin(user: { login: string; password: string; }) {
+  async signin(user: User) {
     const tokens = await this.request<Tokens>(
       "/sign-in",
       {
@@ -56,7 +56,7 @@ class BaseApi {
     this.setTokens(tokens);
   }
 
-  async signup(user: { login: string; password: string }) {
+  async signup(user: User) {
     await this.request("/sign-up", {
       method: "POST",
       body: JSON.stringify(user),
