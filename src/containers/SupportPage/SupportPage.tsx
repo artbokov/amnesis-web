@@ -17,7 +17,7 @@ const questions = [
   {
     req: "На чём базируется назначение терапии? ",
     res: [
-      "Терапия назначается в соотвествии с действующими клиническими рекомендациями принятыми Министерством Здравоохранения",
+      "Терапия назначается в соотвествии с действующими клиническими рекомендациями принятыми Министерством Здравоохранения.",
     ],
   },
   {
@@ -32,7 +32,11 @@ const blocks = [
   {
     id: "questions",
     classname: classes.questions,
-    title: <span className={classes.title}>Часто задаваемые вопросы</span>,
+    title: (
+      <span className={`${classes.title} ${classes["text-attention"]}`}>
+        Часто задаваемые вопросы
+      </span>
+    ),
     subblocks: [
       <>
         {questions.map((question, index) => (
@@ -49,30 +53,6 @@ const blocks = [
           </React.Fragment>
         ))}
       </>,
-    ],
-  },
-  {
-    id: "contacts",
-    classname: classes.contacts,
-    title: <span>Контакты</span>,
-    subblocks: [
-      <div key={"contacts"} className={classes.contactsData}>
-        <div className={classes.col}>
-          <span>
-            +7-(912)-320-21-96 &emsp;
-            <span className={classes.blue}> ararat.sinaev@yandex.ru </span>
-          </span>
-          <span>
-            +7-(952)-928-94-49 &emsp;
-            <span className={classes.blue}> S.shsherbakova@g.nsu.ru </span>
-          </span>
-        </div>
-        {/* <div className={classes.col}>
-					<span>
-						<VkIcon /> - мы в ВКонтакте
-					</span>
-				</div> */}
-      </div>,
     ],
   },
 ];

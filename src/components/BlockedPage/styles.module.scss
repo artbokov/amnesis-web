@@ -8,6 +8,7 @@ $outer-gap: 95px;
 @mixin vertical-flexbox($gap) {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: $gap;
 }
 
@@ -24,7 +25,10 @@ $outer-gap: 95px;
   }
 
   position: absolute;
-  padding-top: $padding-top;
+
+  height: 100vh;
+
+  padding-top: calc($padding-top + c.$header-vh);
   align-items: center;
 
   & > div {

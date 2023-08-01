@@ -64,13 +64,13 @@ $font-size-xs: 12px;
 @mixin colors {
   @each $color, $value in $colors {
     .bg-#{$color} {
-      background-color: $value;
+      background-color: $value !important;
     }
   }
 
   @each $color, $value in $text-colors {
     .text-#{$color} {
-      color: $value;
+      color: $value !important;
     }
   }
 }

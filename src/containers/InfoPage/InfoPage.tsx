@@ -3,7 +3,7 @@ import { BlockedPage, NavigationLink as Link } from "../../components";
 import { ReactComponent as HowItWorksScheme } from "../../assets/sheme.svg";
 
 const InfoPage = () => <BlockedPage blocks={blocks} />;
-
+console.log(classes);
 const blocks = [
   {
     id: "summary",
@@ -37,7 +37,9 @@ const blocks = [
   {
     id: "guide",
     classname: classes.guide,
-    title: <span className={classes.red}> Как пользоваться чатом? </span>,
+    title: (
+      <span className={classes["text-attention"]}>Как пользоваться чатом?</span>
+    ),
 
     subblocks: [
       <ol>
@@ -63,7 +65,9 @@ const blocks = [
   {
     id: "howItWorks",
     classname: classes.howItWorks,
-    title: <span className={classes["text-red"]}> Как это работает? </span>,
+    title: (
+      <span className={classes["text-attention"]}> Как это работает? </span>
+    ),
 
     subblocks: [<HowItWorksScheme key={"howItWorks_1"} />],
   },
