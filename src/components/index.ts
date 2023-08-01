@@ -5,6 +5,7 @@ import NavigationLink from "./NavigationLink/NavigationLink";
 import BlockedPage from "./BlockedPage/BlockedPage";
 import AuthenticationInput from "./AuthenticationInput/AuthenticationInput";
 import Footer from "./BlockedPage/Footer/Footer";
+import ChatInput from "./ChatInput/ChatInput";
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   BlockedPage,
   AuthenticationInput,
   Footer,
+  ChatInput,
 };

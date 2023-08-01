@@ -1,156 +1,20 @@
-@use "../../utils/constants";
+@use "../../utils/constants" as c;
 
-$input-height: 150px;
-$input-vertical-padding: 20px;
+.wrapper {
+  display: flex;
+  flex-direction: column;
 
-$button-width: 200px;
-$grid-vertical-gap: 10px;
-$grid-horizontal-gap: 20px;
-
-$horizontal-padding: calc(50vw - constants.$chat-input-width / 2);
-
-$files-horizontal-gap: 10px;
-$clip-size: 33px;
-
-@mixin customPadding($only-left: true) {
-  @if $only-left == true {
-    padding-left: $horizontal-padding;
-  } @else {
-    padding: 0 $horizontal-padding;
-  }
-}
-
-.chatWrapper {
-  display: grid;
-
-  height: calc(100vh - constants.$header-vh);
-  width: 100vw;
+  margin: auto;
+  height: 100vh;
 
   .messages {
-    display: flex;
-    flex-direction: column-reverse;
-
-    overflow-x: hidden;
-    overflow-y: scroll;
-
-    font-size: constants.$secondary-font-size;
-    font-weight: constants.$secondary-font-weight;
-    color: constants.$dark-blue;
-
-    .message {
-      @include customPadding($only-left: false);
-      display: flex;
-      flex-direction: column;
-
-      height: fit-content;
-
-      @media screen and (min-width: constants.$phone-width-breakpoint) {
-        width: constants.$chat-input-width;
-      }
-      @media screen and (max-width: constants.$phone-width-breakpoint) {
-        margin: 0 constants.$horizontal-margin-for-phone;
-      }
-
-      .message_text {
-        white-space: pre-line;
-        margin: constants.$margin-to-bottom-of-message-text-and-files 0
-          constants.$margin-to-bottom-of-message-text-and-files 0;
-      }
-
-      &.green {
-        background: constants.$light-green;
-      }
-    }
+    flex-grow: 1;
+    height: auto;
   }
 
   .input {
-    @include customPadding;
-
-    position: relative;
-
-    @media screen and (max-width: constants.$phone-width-breakpoint) {
-      display: flex;
-      flex-direction: column;
-
-      padding-left: constants.$horizontal-margin-for-phone;
-      padding-right: constants.$horizontal-margin-for-phone;
-    }
-    @media screen and (min-width: constants.$phone-width-breakpoint) {
-      display: grid;
-      grid-template-columns: constants.$chat-input-width $button-width;
-      grid-template-rows: repeat(4, 1fr);
-
-      width: max(
-        calc(100vw - $horizontal-padding),
-        calc(constants.$chat-input-width + $button-width + $grid-horizontal-gap)
-      );
-      min-height: $input-height;
-    }
-
-    gap: $grid-vertical-gap $grid-horizontal-gap;
-
-    align-self: flex-end;
-
-    padding-block: $input-vertical-padding;
-
-    background: constants.$blue;
-
-    .textarea {
-      position: relative;
-      grid-column: 1;
-      grid-row: 1 / 5;
-
-      textarea {
-        width: calc(100% - 8px); // to compensate border and margin
-        height: calc(100% - 8px);
-
-        font-size: constants.$primary-font-size;
-        resize: none;
-      }
-
-      // svg clip icon
-      .clipIcon {
-        cursor: pointer;
-        position: absolute;
-        bottom: 5px;
-        right: 0;
-
-        height: $clip-size;
-      }
-
-      .uploadedFiles {
-        position: absolute;
-        bottom: 5px;
-        left: 10px;
-
-        svg,
-        .text {
-          cursor: pointer;
-          height: $clip-size;
-        }
-        svg:hover + .text,
-        .text:hover {
-          text-decoration: line-through;
-        }
-      }
-    }
-  }
-}
-
-// uploaded files
-.uploadedFiles {
-  width: calc(100% - $clip-size);
-
-  display: flex;
-  justify-content: flex-start;
-
-  gap: $files-horizontal-gap;
-
-  // word icon
-  svg,
-  .text {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
+    flex-grow: 0;
+    margin: auto;
+    padding-bottom: 30px;
   }
 }

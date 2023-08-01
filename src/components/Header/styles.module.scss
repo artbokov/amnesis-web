@@ -6,22 +6,22 @@
   align-items: center;
   justify-content: center;
 
-  height: c.$header-vh;
+  height: c.$header-height;
   width: 100vw;
 
   z-index: c.$interface-z;
 
   background-color: c.$dark-blue;
-  color: c.$text;
+  color: c.$secondary-text-color;
 
-  font-size: c.$primary-font-size;
+  font-size: c.$font-size-l;
   font-weight: c.$primary-font-weight;
 
   .company-name {
-    @media screen and (min-width: c.$phone-width-breakpoint) {
+    @media screen and (min-width: c.$phone-breakpoint) {
       position: absolute;
     }
-    @media screen and (max-width: c.$phone-width-breakpoint) {
+    @media screen and (max-width: c.$phone-breakpoint) {
       display: none;
     }
     left: 120px;

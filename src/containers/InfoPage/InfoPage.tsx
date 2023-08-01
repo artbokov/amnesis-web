@@ -1,6 +1,6 @@
 import classes from "./styles.module.scss";
 import { BlockedPage, NavigationLink as Link } from "../../components";
-import { ReactComponent as HowItWorksScheme } from "../../assets/sheme.svg";
+import { ReactComponent as HowItWorksScheme } from "../../assets/howItWorks.svg";
 
 const InfoPage = () => <BlockedPage blocks={blocks} />;
 console.log(classes);

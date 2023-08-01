@@ -8,7 +8,7 @@ $guide-block-width: 750px;
 $guide-step-margin: 15px;
 
 .summary {
-  @media screen and (min-width: c.$phone-width-breakpoint) {
+  @media screen and (min-width: c.$phone-breakpoint) {
     width: $info-block-width;
   }
 
@@ -19,7 +19,7 @@ $guide-step-margin: 15px;
 }
 
 .guide {
-  @media screen and (min-width: c.$phone-width-breakpoint) {
+  @media screen and (min-width: c.$phone-breakpoint) {
     width: $guide-block-width;
   }
 
@@ -64,9 +64,9 @@ $guide-step-margin: 15px;
 }
 
 .howItWorks {
-  @media screen and (max-width: c.$phone-width-breakpoint) {
+  @media screen and (max-width: c.$phone-breakpoint) {
     svg {
-      width: calc(100vw - 2 * c.$horizontal-margin-for-phone);
+      width: calc(100vw - 2 * c.$phone-margin);
       height: auto;
     }
   }

@@ -1,0 +1,70 @@
+@use "../../utils/constants" as c;
+
+$input-width: 820px;
+
+@mixin border {
+  border-radius: 13px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input {
+  @include border;
+
+  display: flex;
+  flex-direction: row;
+
+  width: $input-width;
+  background-color: c.$gray;
+  padding: 10px;
+
+  textarea {
+    height: 22px;
+
+    flex: 1 1 auto;
+    margin: auto;
+
+    font-size: c.$font-size-s;
+    align-content: center;
+
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+  }
+
+  .attach-button,
+  .send-button {
+    padding-top: 7px;
+    flex: 0 1 30px;
+  }
+}
+
+.attached-files {
+  @include border;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 5px;
+
+  font-size: c.$font-size-s;
+
+  background-color: c.$gray;
+
+  .file {
+    height: 30px;
+
+    span {
+      display: inline-block;
+      line-height: 30px;
+    }
+    .file-name {
+      transform: translate(0, -25%);
+    }
+  }
+}

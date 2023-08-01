@@ -1,7 +1,7 @@
 import { User, RefreshToken, AccessToken, FileId } from "../../models/types";
 
 type Tokens = RefreshToken & AccessToken;
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL!;
+const BACKEND_URL = `http://${process.env.REACT_APP_BACKEND_URL!}`;
 
 class BaseApi {
   private apiUrl: string;

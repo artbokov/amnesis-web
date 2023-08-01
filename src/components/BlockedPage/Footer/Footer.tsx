@@ -1,4 +1,4 @@
-import classes from "./styles.module.scss";
+import classes from "../styles.module.scss";
 
 const Footer = () => {
   return (

@@ -14,25 +14,47 @@ $outer-gap: 95px;
 
 .wrapper {
   @include vertical-flexbox($outer-gap);
-  @media screen and (min-width: c.$phone-width-breakpoint) {
+  @media screen and (min-width: c.$phone-breakpoint) {
     width: 100vw;
   }
-  @media screen and (max-width: c.$phone-width-breakpoint) {
-    width: calc(100vw - 2 * c.$horizontal-margin-for-phone);
+  @media screen and (max-width: c.$phone-breakpoint) {
+    width: calc(100vw - 2 * c.$phone-margin);
 
-    padding-left: c.$horizontal-margin-for-phone;
-    padding-right: c.$horizontal-margin-for-phone;
+    padding-left: c.$phone-margin;
+    padding-right: c.$phone-margin;
   }
 
   position: absolute;
 
   height: 100vh;
 
-  padding-top: calc($padding-top + c.$header-vh);
+  padding-top: calc($padding-top + c.$header-height);
   align-items: center;
 
   & > div {
     @include vertical-flexbox($inner-gap);
+  }
+
+  .footer {
+    width: 100vw;
+
+    margin-top: 100px;
+    padding-left: 70px;
+    padding-bottom: 20px;
+
+    z-index: c.$interface-z;
+
+    background-color: c.$dark-blue;
+    color: c.$secondary-text-color;
+
+    p {
+      &:first-child {
+        margin: 15px 0;
+        font-size: c.$font-size-xl;
+      }
+      margin: 0;
+      line-height: 30px;
+    }
   }
 }
 

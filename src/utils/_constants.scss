@@ -1,18 +1,7 @@
-// GENERAL CONSTANTS
-$horizontal-margin-for-phone: 20px;
-$phone-width-breakpoint: 481px;
-$header-vh: 52px;
+$phone-breakpoint: 481px;
+$phone-margin: 20px;
 
-// font
-$primary-font-weight: 700;
-$secondary-font-weight: 400;
-
-$header-font-size: 40px;
-$primary-font-size: 20px;
-$secondary-font-size: 16px;
-
-$phone-header-font-size: 30px;
-$phone-primary-font-size: 25px;
+$header-height: 52px;
 
 // z-index
 $background-z: 1;
@@ -20,29 +9,18 @@ $content-z: 2;
 $interface-z: 3;
 
 // colors
-$light-green: rgba(113, 191, 68, 0.3);
-$green: #71bf44;
-$aquamarine: #81ddf1;
-$gray: #c0c0c0;
-$text: #ffffff;
-
-// char
-$chat-input-width: 800px;
-
-// margin top and bottom of <p> element which contains message text
-$margin-to-bottom-of-message-text-and-files: 8px;
-
-// Rework
 $dark-blue: #00153f;
 $blue: #3071e7;
 $light-blue: #00679f;
 $red: #cd4e5c;
+$gray: #e2e4ed;
 
 $colors: (
   "dark-blue": $dark-blue,
   "blue": $blue,
   "light-blue": $light-blue,
   "red": $red,
+  "gray": $gray,
 );
 
 $primary-text-color: #080c25;
@@ -57,9 +35,12 @@ $text-colors: (
 
 $font-size-xl: 40px;
 $font-size-l: 20px;
-$font-size-m: 16px;
-$font-size-s: 24px;
+$font-size-m: 24px;
+$font-size-s: 16px;
 $font-size-xs: 12px;
+
+$primary-font-weight: 700;
+$secondary-font-weight: 400;
 
 @mixin colors {
   @each $color, $value in $colors {

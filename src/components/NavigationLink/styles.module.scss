@@ -7,10 +7,10 @@
 
   padding: 0 20px;
 
-  line-height: c.$header-vh;
+  line-height: c.$header-height;
 
   text-align: center;
-  color: c.$text;
+  color: c.$secondary-text-color;
 
   &:hover {
     cursor: pointer;
