@@ -1,0 +1,23 @@
+@use "../../../utils/constants" as c;
+@include c.colors;
+
+.footer {
+  width: 100vw;
+
+  padding-left: 70px;
+  padding-bottom: 20px;
+
+  z-index: c.$interface-z;
+
+  background-color: c.$dark-blue;
+  color: c.$secondary-text-color;
+
+  p {
+    &:first-child {
+      margin: 15px 0;
+      font-size: c.$font-size-xl;
+    }
+    margin: 0;
+    line-height: 30px;
+  }
+}

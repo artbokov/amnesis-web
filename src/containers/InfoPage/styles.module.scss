@@ -1,23 +1,16 @@
-@use "../../utils/constants";
+@use "../../utils/constants" as c;
+@include c.colors;
 
-$info-block-width: 750px;
-$info-padding-top: 60px;
+$info-block-width: 715px;
+$info-padding-top: 50px;
 
-$guide-block-width: 900px;
-$guide-step-width: 400px;
-$guide-step-padding: 10px;
-
-$path-border: 4px;
-$path-width: calc(
-  $guide-block-width / 2 - $guide-step-width - 2 * $path-border
-);
+$guide-block-width: 750px;
+$guide-step-margin: 15px;
 
 .summary {
-  @media screen and (min-width: constants.$phone-width-breakpoint) {
+  @media screen and (min-width: c.$phone-width-breakpoint) {
     width: $info-block-width;
   }
-
-  color: constants.$dark-blue;
 
   padding-top: $info-padding-top;
 
@@ -26,110 +19,59 @@ $path-width: calc(
 }
 
 .guide {
-  @media screen and (min-width: constants.$phone-width-breakpoint) {
+  @media screen and (min-width: c.$phone-width-breakpoint) {
     width: $guide-block-width;
   }
 
-  .step {
-    position: relative;
+  ol {
+    margin-top: 0;
+    counter-reset: custom-counter;
 
-    width: $guide-step-width - 2 * $guide-step-padding;
-    padding: $guide-step-padding;
-
-    background-color: constants.$blue;
-    color: constants.$text;
-
-    .content {
+    li {
       position: relative;
-      z-index: constants.$content-z;
+      min-height: 50px;
+      margin-bottom: $guide-step-margin;
+      padding-left: 65px;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      list-style: none;
     }
 
-    @media screen and (min-width: constants.$phone-width-breakpoint) {
-      .path {
-        position: absolute;
+    li:before {
+      position: absolute;
+      display: inline-block;
 
-        top: calc(50% - $path-border);
+      top: 0;
+      left: 0;
 
-        height: 0;
-        width: $path-width;
-
-        z-index: constants.$background-z;
-
-        border: $path-border solid constants.$blue;
-
-        align-self: flex-start;
-        justify-self: center;
-      }
-
-      .mainPath {
-        position: absolute;
-
-        top: 0;
-
-        height: 100%;
-        width: 0;
-
-        z-index: constants.$background-z;
-
-        border-left: $path-border solid constants.$blue;
-        border-right: $path-border solid constants.$blue;
-      }
-
-      &.left {
-        align-self: flex-start;
-
-        .path {
-          margin-left: $guide-step-width - $guide-step-padding;
-        }
-
-        .mainPath {
-          margin-left: calc(
-            $guide-block-width / 2 - $path-border / 2 - $guide-step-padding
-          );
-        }
-      }
-
-      &.right {
-        align-self: flex-end;
-
-        .path {
-          margin-left: -$guide-step-padding - $path-border * 2 - $path-width;
-        }
-
-        .mainPath {
-          margin-left: calc(
-            -1 * ($guide-step-padding + $path-border / 2 + $path-width + 2 *
-                  $path-border)
-          );
-        }
-      }
-    }
-
-    table {
-      width: 100%;
-      margin-top: 10px;
+      width: 50px;
+      line-height: 50px;
+      height: 50px;
 
       text-align: center;
 
-      &,
-      td {
-        border: 1px solid constants.$text;
-        border-collapse: collapse;
-      }
+      color: c.$secondary-text-color;
+      background-color: c.$blue;
+      border-radius: 50%;
 
-      td {
-        height: 50px;
-        width: 50%;
-      }
+      counter-increment: custom-counter;
+      content: counter(custom-counter);
     }
   }
 }
 
 .howItWorks {
-  @media screen and (max-width: constants.$phone-width-breakpoint) {
+  @media screen and (max-width: c.$phone-width-breakpoint) {
     svg {
-      width: calc(100vw - 2 * constants.$horizontal-margin-for-phone);
+      width: calc(100vw - 2 * c.$horizontal-margin-for-phone);
       height: auto;
     }
   }
+}
+
+.red {
+  color: c.$red !important;
 }

@@ -44,7 +44,7 @@ const Input = ({ onMessageSend, onOptionSend, options }: inputProps) => {
       <Button
         onClick={sendMessage}
         text="Отправить"
-        optionalClasses={[!!options.length && "disabled"]}
+        optionalStyles={options.length ? ["disabled"] : []}
       />
       {options.map((option) => (
         <Button

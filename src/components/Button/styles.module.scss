@@ -1,4 +1,5 @@
-@use "../../utils/constants";
+@use "../../utils/constants" as c;
+@include c.colors;
 
 $horizontal-padding: 30px;
 $vertical-padding: 5px;
@@ -6,21 +7,11 @@ $height: 50px - 2 * $vertical-padding;
 
 .button {
   text-align: center;
-
   padding: $vertical-padding $horizontal-padding;
-
-  color: constants.$text;
+  color: c.$secondary-text-color;
 
   &:hover {
     cursor: pointer;
-  }
-
-  &.green {
-    background-color: constants.$green;
-  }
-
-  &.blue {
-    background-color: constants.$blue;
   }
 
   &.chat {
@@ -29,6 +20,6 @@ $height: 50px - 2 * $vertical-padding;
 
   &.disabled {
     cursor: default;
-    background-color: constants.$gray;
+    background-color: c.$gray;
   }
 }

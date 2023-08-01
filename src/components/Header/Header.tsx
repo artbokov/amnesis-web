@@ -19,7 +19,7 @@ const links = [
 const Header = () => {
   return (
     <header className={classes.header}>
-      <span className={classes.companyName}> AnaVIT </span>
+      <span className={classes["company-name"]}> AnaVIT </span>
       {links.map((i) => (
         <Link key={i.path} text={i.text} navigateTo={i.path} />
       ))}

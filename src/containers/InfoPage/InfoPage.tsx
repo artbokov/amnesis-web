@@ -4,26 +4,6 @@ import { ReactComponent as HowItWorksScheme } from "../../assets/sheme.svg";
 
 const InfoPage = () => <BlockedPage blocks={blocks} />;
 
-const GuideExampleTable = () => {
-  return (
-    <>
-      Пример работы системы:
-      <table>
-        <tbody>
-          <tr>
-            <td>Линия лечения</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Менопауза</td>
-            <td>Постменопауза</td>
-          </tr>
-        </tbody>
-      </table>
-    </>
-  );
-};
-
 const blocks = [
   {
     id: "summary",
@@ -45,51 +25,45 @@ const blocks = [
         решений, назначает наиболее релевантую для пациента терапию. Назначение
         терапии базируется на рекомендациях Министерства Здравоохранения РФ.
       </span>,
-      <Link key={"summary_2"} text="Перейти к чату" navigateTo="/chat" />,
+      <Link
+        key={"summary_2"}
+        optionalStyles={["bg-red", "round"]}
+        width={200}
+        text="Перейти к чату"
+        navigateTo="/chat"
+      />,
     ],
   },
   {
     id: "guide",
     classname: classes.guide,
-    title: <span> Как пользоваться чатом? </span>,
+    title: <span className={classes.red}> Как пользоваться чатом? </span>,
 
     subblocks: [
-      {
-        align: "left",
-        content: "Открыть чат по кнопке выше или по кнопке в меню",
-      },
-      { align: "left", content: "Прикрепить документ с историей болезни" },
-      {
-        align: "right",
-        content:
-          "Автоматическая система предоставит таблицу текстовых маркеров, найденных методом анализирования текста",
-      },
-      { align: "right", content: <GuideExampleTable /> },
-      {
-        align: "left",
-        content:
-          "Далее вы можете отредактировать ваше сообщение или подтветить информацию, выведенную системой. При редактировании вам нужно указать, какой конкретно параметр вы хотите изменить, и написать корректное значение",
-      },
-      {
-        align: "right",
-        content:
-          "При успешном согласовании всех параметров система предложит наиболее релевантную терапию",
-      },
-    ].map((data: { align: string; content: any }, index: number) => (
-      <div
-        key={`guide_${index}`}
-        className={`${classes.step} ${classes[data.align]}`}
-      >
-        <div className={classes.path} />
-        <div className={classes.mainPath} />
-        <div className={classes.content}>{data.content}</div>
-      </div>
-    )),
+      <ol>
+        <li>Открыть чат по кнопке выше или по кнопке в меню</li>
+        <li>Прикрепить документ с историей болезни</li>
+        <li>
+          Автоматическая система предоставит таблицу текстовых маркеров,
+          найденных методом анлизирования текста
+        </li>
+        <li>
+          Далее вы можете отредактировать ваше сообщение или подтветить
+          информацию, выведенную системой. При редактировании вам нужно указать,
+          какой конкретно параметр вы хотите изменить, и написать корректное
+          значение
+        </li>
+        <li>
+          При успешном согласовании всех парметров система предложит наиболее
+          релевантную терапию
+        </li>
+      </ol>,
+    ],
   },
   {
     id: "howItWorks",
     classname: classes.howItWorks,
-    title: <span> Как это работает? </span>,
+    title: <span className={classes["text-red"]}> Как это работает? </span>,
 
     subblocks: [<HowItWorksScheme key={"howItWorks_1"} />],
   },

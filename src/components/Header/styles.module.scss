@@ -1,4 +1,4 @@
-@use "../../utils/constants";
+@use "../../utils/constants" as c;
 
 .header {
   position: fixed;
@@ -6,22 +6,22 @@
   align-items: center;
   justify-content: center;
 
-  height: constants.$header-vh;
+  height: c.$header-vh;
   width: 100vw;
 
-  z-index: constants.$interface-z;
+  z-index: c.$interface-z;
 
-  background-color: constants.$green;
-  color: constants.$text;
+  background-color: c.$dark-blue;
+  color: c.$text;
 
-  font-size: constants.$primary-font-size;
-  font-weight: constants.$primary-font-weight;
+  font-size: c.$primary-font-size;
+  font-weight: c.$primary-font-weight;
 
-  .companyName {
-    @media screen and (min-width: constants.$phone-width-breakpoint) {
+  .company-name {
+    @media screen and (min-width: c.$phone-width-breakpoint) {
       position: absolute;
     }
-    @media screen and (max-width: constants.$phone-width-breakpoint) {
+    @media screen and (max-width: c.$phone-width-breakpoint) {
       display: none;
     }
     left: 120px;
