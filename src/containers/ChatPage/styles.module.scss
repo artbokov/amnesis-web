@@ -1,20 +1,59 @@
 @use "../../utils/constants" as c;
 
+@mixin message($is-user) {
+  width: fit-content;
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 13px;
+
+  @if $is-user {
+    background-color: #cee2f4;
+    align-self: self-end;
+  } @else {
+    background-color: #d3daf8;
+    align-self: self-start;
+  }
+
+  .attached-file {
+    display: flex;
+    flex-direction: row;
+
+    height: 40px;
+    line-height: 40px;
+
+    font-weight: c.$primary-font-weight;
+  }
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
 
   margin: auto;
   height: 100vh;
+  width: fit-content;
 
   .messages {
+    display: flex;
+    flex-direction: column-reverse;
     flex-grow: 1;
     height: auto;
+
+    font-size: c.$font-size-s;
+    font-weight: c.$secondary-font-weight;
+
+    .message-user {
+      @include message(true);
+    }
+    .message-wrapper {
+      .message-bot {
+        @include message(false);
+      }
+    }
   }
 
   .input {
     flex-grow: 0;
-    margin: auto;
     padding-bottom: 30px;
   }
 }

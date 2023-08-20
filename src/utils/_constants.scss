@@ -55,3 +55,13 @@ $secondary-font-weight: 400;
     }
   }
 }
+
+@mixin primary-font {
+  font-size: $font-size-l;
+  font-weight: $primary-font-weight;
+}
+
+@mixin secondary-font {
+  font-size: $font-size-s;
+  font-weight: $secondary-font-weight;
+}

@@ -1,0 +1,23 @@
+@use "../../utils/constants" as c;
+
+.form-wrapper {
+  width: 340px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  color: c.$secondary-text-color;
+
+  .page-title {
+    font-size: c.$font-size-xl;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .end-note {
+    font-size: c.$font-size-s;
+    text-align: center;
+    margin-top: 10px;
+  }
+}

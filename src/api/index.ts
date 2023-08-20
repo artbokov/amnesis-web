@@ -1,4 +1,3 @@
-import messagesApi from "./async/MessagesApi";
-import baseApi from "./sync/BaseApi";
+import authApi from "./auth";
 
-export { messagesApi, baseApi };
+export { authApi };

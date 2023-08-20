@@ -1,13 +1,18 @@
 import { Outlet } from "react-router-dom";
-import { Footer, Header } from "../../components";
+import { Header } from "../../components";
+import { useEffect } from "react";
 
 const MainLayout = () => {
-  return (
-    <main>
-      <Header />
-      <Outlet />
-    </main>
-  );
+    useEffect(() => {
+        document.getElementById("body")!.style.backgroundColor = "#FFF";
+    }, []);
+
+    return (
+        <main>
+            <Header />
+            <Outlet />
+        </main>
+    );
 };
 
 export default MainLayout;

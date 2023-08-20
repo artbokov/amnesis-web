@@ -2,13 +2,17 @@
 @include c.colors;
 
 $horizontal-padding: 30px;
-$vertical-padding: 5px;
 
 .button {
+  width: fit-content;
+
+  margin: auto;
+
   color: c.$secondary-text-color;
 
   .text {
-    padding: $vertical-padding $horizontal-padding;
+    line-height: 52px;
+    padding-inline: $horizontal-padding;
     text-align: center;
   }
 
@@ -16,7 +20,7 @@ $vertical-padding: 5px;
     cursor: pointer;
   }
 
-  &.chat {
+  &.round {
     border-radius: 20px;
   }
 

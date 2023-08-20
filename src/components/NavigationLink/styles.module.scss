@@ -12,8 +12,19 @@
   text-align: center;
   color: c.$secondary-text-color;
 
+  &.inline {
+    line-height: normal;
+  }
+
+  &.underline {
+    text-decoration: underline;
+  }
+
   &:hover {
     cursor: pointer;
+  }
+
+  &:not(.no-hover):hover {
     background-color: c.$light-blue;
   }
 

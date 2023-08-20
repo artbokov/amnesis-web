@@ -1,0 +1,8 @@
+@use "../../utils/constants" as c;
+
+.form-input {
+  .end-block {
+    @include c.secondary-font;
+    text-align: end;
+  }
+}
