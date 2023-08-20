@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   const isDisabled = optionalStyles?.includes("disabled");
 
   return (
-    <span
+    <div
       className={classNames(
         classes.button,
         Icon ? null : classes["bg-red"],
@@ -25,8 +25,8 @@ const Button: React.FC<ButtonProps> = ({
       )}
       onClick={() => isDisabled || onClick()}
     >
-      {text ? <span className={classes.text}>{text}</span> : Icon}
-    </span>
+      {text ? <div className={classes.text}>{text}</div> : Icon}
+    </div>
   );
 };
 

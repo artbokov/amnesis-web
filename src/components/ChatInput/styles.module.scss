@@ -21,16 +21,13 @@ $input-width: 820px;
 
   width: $input-width;
   background-color: c.$gray;
-  padding: 10px;
+  padding: 3px 7px 3px 15px;
 
   textarea {
-    height: 22px;
-
     flex: 1 1 auto;
     margin: auto;
 
     font-size: c.$font-size-s;
-    align-content: center;
 
     border: none;
     background-color: transparent;
@@ -38,9 +35,10 @@ $input-width: 820px;
     outline: none;
   }
 
+  .options-button,
   .attach-button,
   .send-button {
-    padding-top: 7px;
+    padding-top: 10px;
     flex: 0 1 30px;
   }
 }
@@ -57,14 +55,10 @@ $input-width: 820px;
   background-color: c.$gray;
 
   .file {
+    display: flex;
+    flex-direction: row;
     height: 30px;
 
-    span {
-      display: inline-block;
-      line-height: 30px;
-    }
-    .file-name {
-      transform: translate(0, -25%);
-    }
+    line-height: 30px;
   }
 }
