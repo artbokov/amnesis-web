@@ -4,16 +4,17 @@ import {
     clearAuthTokens,
     setAuthTokens,
 } from "axios-jwt";
-import { UserData, UserCredentials, UserInfo } from "./types";
+import { UserData, UserCredentials, UserInfo, Message } from "./types";
+import { Message as ClientMessage } from "../components/ChatInput/ChatInput";
 
-const BASE_URL = `https://${process.env.REACT_APP_BACKEND_URL}/auth`;
+const BASE_URL = `https://${process.env.REACT_APP_BACKEND_URL}`;
 
 class AuthApi {
     private axiosInstance: AxiosInstance;
 
     constructor() {
         this.axiosInstance = axios.create({
-            baseURL: BASE_URL,
+            baseURL: `${BASE_URL}/auth`,
             timeout: 2500,
         });
 
@@ -95,6 +96,37 @@ class AuthApi {
         return this.axiosInstance
             .get<any, AxiosResponse<UserInfo>>("/get-user-info")
             .then((response) => response.data);
+    }
+
+    uploadFile(file: File): Promise<string> {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        return this.axiosInstance
+            .put("/upload", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                baseURL: `${BASE_URL}/messages`,
+            })
+            .then((response) => response.data.id);
+    }
+
+    sendMessage(clientMessage: ClientMessage): Promise<void> {
+        return Promise.all(
+            clientMessage.files.map((file) => this.uploadFile(file))
+        ).then((fileIds) => {
+            const message: Message = {
+                options: {},
+                commands: {},
+                ...clientMessage,
+                files: fileIds,
+            };
+            console.log(message);
+            return this.axiosInstance.post("/send", message, {
+                baseURL: `${BASE_URL}/messages`,
+            });
+        });
     }
 }
 

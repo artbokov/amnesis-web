@@ -1,29 +1,19 @@
 import classes from "./styles.module.scss";
 import { Button, ChatInput as Input } from "../../components";
-import { Message as ClientMessage } from "../../components/ChatInput/ChatInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactComponent as FileIcon } from "../../assets/fileIcon.svg";
-
-type MessageWithOwner = ClientMessage &
-    (
-        | {
-              owner: "User";
-          }
-        | {
-              owner: "Bot";
-              options: { [key: string]: string };
-          }
-    );
+import { useAuthentication } from "../../contexts/AuthContext";
+import { RecivedMessage } from "../../api/types";
 
 const ChatPage = () => {
-    const [messages, setMessages] = useState<MessageWithOwner[]>([]);
+    const [messages, setMessages] = useState<RecivedMessage[]>([]);
+    const { sendMessage, addMessageListener } = useAuthentication();
 
-    const handleMessageSend = (message: ClientMessage) => {
-        setMessages((prevState) => [
-            { ...message, owner: "User" },
-            ...prevState,
-        ]);
-    };
+    useEffect(() => {
+        addMessageListener((message: RecivedMessage) => {
+            setMessages((prev) => [message, ...prev]);
+        });
+    }, []);
 
     return (
         <div className={classes.wrapper}>
@@ -57,7 +47,7 @@ const ChatPage = () => {
                 )}
             </div>
             <div className={classes.input}>
-                <Input onSend={handleMessageSend} />
+                <Input onSend={sendMessage} />
             </div>
         </div>
     );

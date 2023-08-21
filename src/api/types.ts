@@ -25,10 +25,10 @@ interface UserData {
 interface Message {
     text: string;
     files: string[];
-    options?: {
+    options: {
         [key: string]: string;
     };
-    commands?: {
+    commands: {
         [key: string]: string;
     };
 }
@@ -43,7 +43,7 @@ interface RecivedMessage extends Omit<Message, "commands" | "files"> {
         name: string;
         content_type: string;
         size: number;
-    };
+    }[];
     creating_dt: string;
 }
 

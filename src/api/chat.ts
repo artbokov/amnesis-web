@@ -1,9 +1,7 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { getAccessToken } from "axios-jwt";
 import { RecivedMessage } from "./types";
 
 const WS_URL = `wss://${process.env.REACT_APP_BACKEND_URL}/ws-proxy/proxy`;
-const BASE_URL = `https://${process.env.REACT_APP_BACKEND_URL}/messages`;
 
 const EVENT_TYPES = {
     AUTH_RQ: "AuthenticateRequest",
@@ -12,14 +10,13 @@ const EVENT_TYPES = {
     OPTION_SELECTED: "OptionSelected",
 };
 
-type MessageCallback = (newMessage: RecivedMessage) => void;
+export type MessageCallback = (newMessage: RecivedMessage) => void;
 
 class ChatApi {
     private socket: WebSocket = new WebSocket(WS_URL);
     private isAuthenticated = false;
     private messageQueue: RecivedMessage[] = [];
     private messageCallbacks: MessageCallback[] = [];
-    private axiosInstance: AxiosInstance;
 
     constructor() {
         this.socket.onopen = () => {
@@ -37,19 +34,15 @@ class ChatApi {
         };
 
         this.socket.onmessage = (e) => this.onMessage(e);
-
-        this.axiosInstance = axios.create({
-            baseURL: BASE_URL,
-            timeout: 2500,
-        });
     }
 
     onMessage(e: any) {
         const response = JSON.parse(e.data);
-
+        console.log(e);
         const processMessageQueue = () => {
             for (const cb of this.messageCallbacks) {
                 for (const message of this.messageQueue) {
+                    console.log("call 1");
                     cb(message);
                 }
             }
@@ -77,12 +70,8 @@ class ChatApi {
         }
     }
 
-    addMessageCallback(cb: MessageCallback) {
+    addMessageListener(cb: MessageCallback) {
         this.messageCallbacks.push(cb);
-    }
-
-    sendMessage(message: RecivedMessage): Promise<void> {
-        return this.axiosInstance.post("/send", message);
     }
 }
 
