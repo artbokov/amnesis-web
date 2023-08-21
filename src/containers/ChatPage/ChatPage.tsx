@@ -1,10 +1,10 @@
 import classes from "./styles.module.scss";
 import { Button, ChatInput as Input } from "../../components";
-import { Message } from "../../components/ChatInput/ChatInput";
+import { Message as ClientMessage } from "../../components/ChatInput/ChatInput";
 import { useState } from "react";
 import { ReactComponent as FileIcon } from "../../assets/fileIcon.svg";
 
-type MessageWithOwner = Message &
+type MessageWithOwner = ClientMessage &
     (
         | {
               owner: "User";
@@ -18,7 +18,7 @@ type MessageWithOwner = Message &
 const ChatPage = () => {
     const [messages, setMessages] = useState<MessageWithOwner[]>([]);
 
-    const handleMessageSend = (message: Message) => {
+    const handleMessageSend = (message: ClientMessage) => {
         setMessages((prevState) => [
             { ...message, owner: "User" },
             ...prevState,
