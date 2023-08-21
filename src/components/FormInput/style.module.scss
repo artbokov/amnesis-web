@@ -3,6 +3,7 @@
 .form-input {
   .end-block {
     @include c.secondary-font;
+    margin-top: 10px;
     text-align: end;
   }
 }

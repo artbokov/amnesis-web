@@ -5,6 +5,7 @@ import SupportPage from "../SupportPage/SupportPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import PasswordResetPage from "../PasswordResetPage/PasswordResetPage";
 import LoginPage from "../LoginPage/LoginPage";
+import VerifyEmailPage from "../VerifyEmailPage/VerifyEmailPage";
 
 interface Route extends NonIndexRouteObject {
     isPrivate?: boolean;
@@ -14,6 +15,10 @@ const routes: Route[] = [
     {
         path: "*",
         element: <Navigate to="/login" />,
+    },
+    {
+        path: "/verify-email/:tokenId",
+        element: <VerifyEmailPage />,
     },
     {
         path: "/login",

@@ -13,4 +13,13 @@ interface UserCredentials {
     password: string;
 }
 
-export type { UserInfo, UserCredentials };
+interface UserData {
+    surname: string;
+    name: string;
+    patronymmic?: string;
+    email: string;
+    password: string;
+    passwordRepeat: string;
+}
+
+export type { UserInfo, UserCredentials, UserData };

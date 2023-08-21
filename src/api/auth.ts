@@ -4,7 +4,7 @@ import {
     clearAuthTokens,
     setAuthTokens,
 } from "axios-jwt";
-import { UserCredentials, UserInfo } from "./types";
+import { UserData, UserCredentials, UserInfo } from "./types";
 
 const BASE_URL = `https://${process.env.REACT_APP_BACKEND_URL}/auth`;
 
@@ -45,6 +45,33 @@ class AuthApi {
 
     signOut() {
         clearAuthTokens();
+    }
+
+    signUp(data: UserData): Promise<void> {
+        const formData = new FormData();
+
+        Object.keys(data).map((i) => {
+            if (i in data) {
+                formData.append(i, data[i as keyof UserData] as string);
+            }
+        });
+
+        formData.append("first_name", data.name);
+        formData.append("second_name", data.surname);
+
+        return this.axiosInstance
+            .post("/sign-up", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then(console.log);
+    }
+
+    verifyEmail(tokenId: string): Promise<void> {
+        return this.axiosInstance
+            .post(`/verify-email/${tokenId}`)
+            .then(console.log);
     }
 
     changePassword(newPassword: string) {

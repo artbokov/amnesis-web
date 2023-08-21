@@ -13,6 +13,7 @@ interface FormPageProps<T extends string> {
     validationSchema: object;
     fields: {
         name: T;
+        label?: string;
         type: string;
         endBlockContainer?: React.ReactNode;
     }[];
@@ -54,17 +55,19 @@ function FormPage<T extends string>({
                             <FormInput
                                 type={field.type}
                                 name={field.name}
-                                label={capitalize(field.name)}
+                                label={field.label ?? capitalize(field.name)}
                                 error={Boolean(errors[field.name])}
                                 endBlockContainer={field.endBlockContainer}
                             />
                         ))}
-                        <Button
-                            label={submitButtonTitle}
-                            color="bg-blue"
-                            optionalStyles={["round"]}
-                            onClick={submitForm}
-                        />
+                        <div className={classes["submit-button"]}>
+                            <Button
+                                label={submitButtonTitle}
+                                color="bg-blue"
+                                optionalStyles={["round"]}
+                                onClick={submitForm}
+                            />
+                        </div>
                         <span className={classes["end-note"]}>
                             {endNoteContainer}
                         </span>

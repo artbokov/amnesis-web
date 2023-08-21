@@ -11,10 +11,7 @@ const validationSchema = yup.object({
         .string()
         .email("Enter a valid email")
         .required("Email is required"),
-    password: yup
-        .string()
-        .min(8, "Password should be of minimum 8 characters length")
-        .required("Password is required"),
+    password: yup.string().required("Password is required"),
 });
 
 const LoginPage: React.FC = () => {
@@ -46,7 +43,7 @@ const LoginPage: React.FC = () => {
                         <NavigationLink
                             text="Забыли пароль?"
                             navigateTo="/password-reset"
-                            optionalStyles={["underline", "no-hover"]}
+                            optionalStyles={["underline", "no-hover", "inline"]}
                         />
                     ),
                 },
