@@ -4,20 +4,20 @@ import routes from "./routes";
 import { useAuthentication } from "../../contexts/AuthContext";
 
 const App = () => {
-    const authContext = useAuthentication();
+    const { user } = useAuthentication();
 
     const element: RouteObject[] = [
         {
             element: <AuthLayout />,
-            children: !authContext.user
-                ? routes.filter((i) => !i.isPrivate)
-                : undefined,
+            children: routes.filter(
+                (i) => i.layout === "auth" && (user || !i.isPrivate)
+            ),
         },
         {
             element: <MainLayout />,
-            children: authContext.user
-                ? routes.filter((i) => i.isPrivate)
-                : undefined,
+            children: routes.filter(
+                (i) => i.layout === "main" && (user || !i.isPrivate)
+            ),
         },
     ];
     return useRoutes(element);

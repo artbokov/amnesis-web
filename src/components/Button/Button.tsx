@@ -11,7 +11,7 @@ type ButtonProps = (
           label: string;
       }
 ) & {
-    color?: "bg-red" | "bg-blue";
+    color?: "bg-red" | "bg-blue" | "bg-dark-blue";
     optionalStyles?: ("round" | "disabled")[];
     onClick: () => void;
 };

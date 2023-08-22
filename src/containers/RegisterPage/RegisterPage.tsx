@@ -33,7 +33,7 @@ const RegisterPage: React.FC = () => {
     const handleSubmit = (data: UserData) => {
         setIsLoading(true);
         signUp(data)
-            .then(() => navigate("/login"))
+            .then(() => navigate("/email-verification"))
             .finally(() => setIsLoading(false));
     };
 

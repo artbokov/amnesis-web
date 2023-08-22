@@ -26,4 +26,34 @@
     }
     left: 120px;
   }
+
+  .user-data {
+    display: flex;
+    position: absolute;
+    right: 10px;
+    gap: 10px;
+
+    .user-info {
+      font-size: c.$font-size-s;
+
+      display: flex;
+      flex-direction: column;
+
+      .user-name {
+        align-self: flex-end;
+      }
+
+      .user-email {
+        font-size: c.$font-size-xs;
+      }
+    }
+    .icon-imitation {
+      width: 35px;
+      height: 35px;
+      margin-right: 20px;
+
+      border-radius: 50%;
+      background-color: #fff;
+    }
+  }
 }
