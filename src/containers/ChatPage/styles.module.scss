@@ -39,7 +39,7 @@
     flex-direction: column-reverse;
     flex-grow: 1;
     height: auto;
-    overflow: scroll;
+    overflow-y: scroll;
 
     font-size: c.$font-size-s;
     font-weight: c.$secondary-font-weight;

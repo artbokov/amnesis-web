@@ -45,6 +45,7 @@ interface RecivedMessage extends Omit<Message, "commands" | "files"> {
         size: number;
     }[];
     creating_dt: string;
+    selected_option: string | null | undefined;
 }
 
 export type { UserInfo, UserCredentials, UserData, RecivedMessage, Message };

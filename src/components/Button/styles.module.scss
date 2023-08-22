@@ -20,6 +20,10 @@ $horizontal-padding: 30px;
     cursor: pointer;
   }
 
+  &.dim-on-hover:hover {
+    background-color: #6195f3 !important;
+  }
+
   &.round {
     border-radius: 20px;
   }
@@ -28,4 +32,8 @@ $horizontal-padding: 30px;
     cursor: default;
     background-color: c.$gray;
   }
+
+  // &.selected {
+  //   background: linear-gradient(rgb(0 0 0/20%) 0 0);
+  // }
 }

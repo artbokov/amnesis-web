@@ -5,9 +5,12 @@ import { ReactComponent as FileIcon } from "../../assets/fileIcon.svg";
 import { useAuthentication } from "../../contexts/AuthContext";
 import { RecivedMessage } from "../../api/types";
 import { chatApi } from "../../api";
+import parse from "html-react-parser";
 
 const ChatPage = () => {
     const [messages, setMessages] = useState<RecivedMessage[]>([]);
+    const [clicked, setClicked] = useState<{ [messageId: string]: string }>({});
+
     const {
         sendMessage,
         addMessageListener,
@@ -49,7 +52,7 @@ const ChatPage = () => {
                     ) : (
                         <div key={index} className={classes[`message-wrapper`]}>
                             <div className={classes["message-bot"]}>
-                                {message.text}
+                                {parse(message.text)}
                                 {message.files.map((file) => (
                                     <a
                                         className={classes["attached-file"]}
@@ -64,11 +67,36 @@ const ChatPage = () => {
                                 {Object.keys(message.options).map((key) => (
                                     <Button
                                         label={message.options[key]}
-                                        onClick={() =>
-                                            selectOption(message.id, key)
+                                        hoverEffect={
+                                            !(message.id in clicked) &&
+                                            !message.selected_option
+                                        }
+                                        optionalStyles={
+                                            message.id in clicked ||
+                                            message.selected_option
+                                                ? ["round", "disabled"]
+                                                : ["round"]
+                                        }
+                                        selected={
+                                            key === clicked[message.id] ||
+                                            key === message.selected_option
+                                        }
+                                        onClick={
+                                            message.id in clicked ||
+                                            message.selected_option
+                                                ? () => {}
+                                                : () => {
+                                                      setClicked((prev) => ({
+                                                          ...prev,
+                                                          [message.id]: key,
+                                                      }));
+                                                      selectOption(
+                                                          message.id,
+                                                          key
+                                                      );
+                                                  }
                                         }
                                         color="bg-blue"
-                                        optionalStyles={["round"]}
                                     />
                                 ))}
                             </div>
