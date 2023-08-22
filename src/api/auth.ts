@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import {
+    IAuthTokens,
     applyAuthTokenInterceptor,
     clearAuthTokens,
     setAuthTokens,
@@ -15,6 +16,11 @@ import { Message as ClientMessage } from "../components/ChatInput/ChatInput";
 
 const BASE_URL = `https://${process.env.REACT_APP_BACKEND_URL}`;
 
+function saveTokensToStorage(tokens: IAuthTokens) {
+    localStorage.setItem("access_token", tokens.accessToken);
+    localStorage.setItem("refresh_token", tokens.refreshToken);
+}
+
 class AuthApi {
     private axiosInstance: AxiosInstance;
 
@@ -24,16 +30,30 @@ class AuthApi {
             timeout: 2500,
         });
 
+        if (localStorage.getItem("access_token")) {
+            setAuthTokens({
+                accessToken: localStorage!.getItem("access_token") as string,
+                refreshToken: localStorage!.getItem("refresh_token") as string,
+            });
+        }
+
         applyAuthTokenInterceptor(this.axiosInstance, {
             requestRefresh: (refreshToken) =>
                 axios
                     .post(`${BASE_URL}/refresh`, {
                         refresh_token: refreshToken,
                     })
-                    .then((response) => ({
-                        accessToken: response.data.access_token,
-                        refreshToken: response.data.refresh_token,
-                    })),
+                    .then((response) => {
+                        const tokens = {
+                            accessToken: response.data.access_token,
+                            refreshToken: response.data.refresh_token,
+                        };
+                        saveTokensToStorage(tokens);
+                        return {
+                            accessToken: response.data.access_token,
+                            refreshToken: response.data.refresh_token,
+                        };
+                    }),
             header: "Authorization",
             headerPrefix: "Bearer ",
         });
@@ -42,12 +62,14 @@ class AuthApi {
     signIn(credentials: UserCredentials): Promise<void> {
         return this.axiosInstance
             .post("/sign-in", credentials)
-            .then((response) =>
-                setAuthTokens({
+            .then((response) => {
+                const tokens = {
                     accessToken: response.data.access_token,
                     refreshToken: response.data.refresh_token,
-                })
-            );
+                };
+                saveTokensToStorage(tokens);
+                setAuthTokens(tokens);
+            });
     }
 
     signOut() {

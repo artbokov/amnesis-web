@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import {
     Message,
     RecivedMessage,
@@ -56,6 +62,12 @@ export const AuthProvider: React.FC<{
 }> = ({ children }) => {
     const [user, setUser] = useState<UserInfo | null>(null);
 
+    useEffect(() => {
+        if (localStorage.getItem("access_token")) {
+            authApi.getUserInfo().then(setUser);
+        }
+    }, []);
+
     const signIn = useCallback(
         (credentials: UserCredentials) =>
             authApi.signIn(credentials).then(() => {
@@ -67,6 +79,7 @@ export const AuthProvider: React.FC<{
     const signOut = useCallback(() => {
         authApi.signOut();
         setUser(null);
+        localStorage.clear();
     }, []);
 
     return (
