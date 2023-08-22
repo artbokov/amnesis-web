@@ -7,9 +7,19 @@ import { RecivedMessage } from "../../api/types";
 
 const ChatPage = () => {
     const [messages, setMessages] = useState<RecivedMessage[]>([]);
-    const { sendMessage, addMessageListener } = useAuthentication();
+    const {
+        sendMessage,
+        addMessageListener,
+        getChatHistory,
+        selectOption,
+        addSocketReconnectListener,
+    } = useAuthentication();
 
     useEffect(() => {
+        getChatHistory().then(setMessages);
+        addSocketReconnectListener(() => {
+            getChatHistory().then(setMessages);
+        });
         addMessageListener((message: RecivedMessage) => {
             setMessages((prev) => [message, ...prev]);
         });
@@ -17,7 +27,7 @@ const ChatPage = () => {
 
     return (
         <div className={classes.wrapper}>
-            <div className={classes.messages}>
+            <div id="messages" className={classes.messages}>
                 {messages.map((message, index) =>
                     message.owner === "User" ? (
                         <div key={index} className={classes[`message-user`]}>
@@ -33,15 +43,28 @@ const ChatPage = () => {
                         <div key={index} className={classes[`message-wrapper`]}>
                             <div className={classes["message-bot"]}>
                                 {message.text}
+                                {message.files.map((file) => (
+                                    <a
+                                        className={classes["attached-file"]}
+                                        href={`https://${process.env.REACT_APP_BACKEND_URL}/messages/attached-to-message-file/${message.id}/${file.id}`}
+                                    >
+                                        <FileIcon />
+                                        {file.name}
+                                    </a>
+                                ))}
                             </div>
-                            {Object.keys(message.options).map((key) => (
-                                <Button
-                                    label={message.options[key]}
-                                    onClick={() => {}}
-                                    color="bg-blue"
-                                    optionalStyles={["round"]}
-                                />
-                            ))}
+                            <div className={classes["message-options"]}>
+                                {Object.keys(message.options).map((key) => (
+                                    <Button
+                                        label={message.options[key]}
+                                        onClick={() =>
+                                            selectOption(message.id, key)
+                                        }
+                                        color="bg-blue"
+                                        optionalStyles={["round"]}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     )
                 )}

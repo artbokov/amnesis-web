@@ -1,12 +1,13 @@
 @use "../../utils/constants" as c;
 
 @mixin message($is-user) {
-  width: fit-content;
-  margin-bottom: 30px;
   padding: 15px;
   border-radius: 13px;
 
   @if $is-user {
+    width: fit-content;
+    margin-bottom: 30px;
+
     background-color: #cee2f4;
     align-self: self-end;
   } @else {
@@ -38,16 +39,31 @@
     flex-direction: column-reverse;
     flex-grow: 1;
     height: auto;
+    overflow: scroll;
 
     font-size: c.$font-size-s;
     font-weight: c.$secondary-font-weight;
 
     .message-user {
       @include message(true);
+      max-width: 70%;
     }
     .message-wrapper {
+      width: fit-content;
+      max-width: 70%;
+
       .message-bot {
         @include message(false);
+      }
+      .message-options {
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+
+        gap: 10px;
       }
     }
   }

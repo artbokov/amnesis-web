@@ -14,11 +14,18 @@ export type MessageCallback = (newMessage: RecivedMessage) => void;
 
 class ChatApi {
     private socket: WebSocket = new WebSocket(WS_URL);
-    private isAuthenticated = false;
+    public isAuthenticated = false;
     private messageQueue: RecivedMessage[] = [];
     private messageCallbacks: MessageCallback[] = [];
+    private reconectCallbacks: (() => void)[] = [];
 
     constructor() {
+        this.socketInit();
+    }
+
+    socketInit() {
+        this.reconectCallbacks.map((cb) => cb());
+
         this.socket.onopen = () => {
             const waitForLoginInterval = setInterval(() => {
                 if (getAccessToken()) {
@@ -34,6 +41,11 @@ class ChatApi {
         };
 
         this.socket.onmessage = (e) => this.onMessage(e);
+        this.socket.onclose = () => {
+            setTimeout(() => {
+                this.socketInit();
+            }, 1000);
+        };
     }
 
     onMessage(e: any) {
@@ -72,6 +84,10 @@ class ChatApi {
 
     addMessageListener(cb: MessageCallback) {
         this.messageCallbacks.push(cb);
+    }
+
+    addSocketReconnectListener(cb: any) {
+        this.reconectCallbacks.push(cb);
     }
 }
 

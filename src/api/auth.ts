@@ -4,7 +4,13 @@ import {
     clearAuthTokens,
     setAuthTokens,
 } from "axios-jwt";
-import { UserData, UserCredentials, UserInfo, Message } from "./types";
+import {
+    UserData,
+    UserCredentials,
+    UserInfo,
+    Message,
+    RecivedMessage,
+} from "./types";
 import { Message as ClientMessage } from "../components/ChatInput/ChatInput";
 
 const BASE_URL = `https://${process.env.REACT_APP_BACKEND_URL}`;
@@ -90,15 +96,6 @@ class AuthApi {
         });
     }
 
-    getChat() {
-        return this.axiosInstance.get("/chat", {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-            baseURL: `${BASE_URL}/messages`,
-        });
-    }
-
     downloadAvatar() {}
 
     getUserInfo(): Promise<UserInfo> {
@@ -136,6 +133,33 @@ class AuthApi {
                 baseURL: `${BASE_URL}/messages`,
             });
         });
+    }
+
+    getChat() {
+        return this.axiosInstance.get("/chat", {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            baseURL: `${BASE_URL}/messages`,
+        });
+    }
+
+    getHistory(): Promise<RecivedMessage[]> {
+        return this.axiosInstance
+            .get("/history", {
+                baseURL: `${BASE_URL}/messages`,
+            })
+            .then((response) => response.data.history);
+    }
+
+    selectOption(message_id: string, option_name: string): Promise<void> {
+        return this.axiosInstance.post(
+            "/select-option",
+            { message_id, option_name },
+            {
+                baseURL: `${BASE_URL}/messages`,
+            }
+        );
     }
 }
 
