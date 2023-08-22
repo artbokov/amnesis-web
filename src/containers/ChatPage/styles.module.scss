@@ -32,7 +32,7 @@
 
   margin: auto;
   height: 100vh;
-  width: fit-content;
+  width: min(820px, 100vw - 2 * c.$phone-margin);
 
   .messages {
     display: flex;
