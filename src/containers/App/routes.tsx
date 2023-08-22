@@ -76,7 +76,7 @@ const routes: Route[] = [
     },
     {
         path: "*",
-        element: <Navigate to="/login" />,
+        element: <Navigate to="/info" />,
         // isPrivate: true,
         layout: "main",
     },
