@@ -28,13 +28,17 @@ class ChatApi {
 
         this.socket.onopen = () => {
             const waitForLoginInterval = setInterval(() => {
-                if (getAccessToken()) {
+                if (localStorage.getItem("access_token")) {
                     this.socket.send(
                         JSON.stringify({
                             event_type: EVENT_TYPES.AUTH_RQ,
-                            token: getAccessToken(),
+                            token: localStorage.getItem("access_token"),
                         })
                     );
+                    console.log({
+                        event_type: EVENT_TYPES.AUTH_RQ,
+                        token: localStorage.getItem("access_token"),
+                    });
                     clearInterval(waitForLoginInterval);
                 }
             }, 1000);
@@ -42,7 +46,9 @@ class ChatApi {
 
         this.socket.onmessage = (e) => this.onMessage(e);
         this.socket.onclose = () => {
+            console.log("Socket Closed!");
             setTimeout(() => {
+                console.log("Socket Init!");
                 this.socketInit();
             }, 1000);
         };
@@ -50,6 +56,7 @@ class ChatApi {
 
     onMessage(e: any) {
         const response = JSON.parse(e.data);
+        console.log(response);
 
         const processMessageQueue = () => {
             for (const cb of this.messageCallbacks) {

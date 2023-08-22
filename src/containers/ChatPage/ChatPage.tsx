@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ReactComponent as FileIcon } from "../../assets/fileIcon.svg";
 import { useAuthentication } from "../../contexts/AuthContext";
 import { RecivedMessage } from "../../api/types";
+import { chatApi } from "../../api";
 
 const ChatPage = () => {
     const [messages, setMessages] = useState<RecivedMessage[]>([]);
@@ -16,13 +17,19 @@ const ChatPage = () => {
     } = useAuthentication();
 
     useEffect(() => {
-        getChatHistory().then(setMessages);
-        addSocketReconnectListener(() => {
-            getChatHistory().then(setMessages);
-        });
-        addMessageListener((message: RecivedMessage) => {
-            setMessages((prev) => [message, ...prev]);
-        });
+        const interval = setInterval(() => {
+            if (chatApi.isAuthenticated) {
+                console.log("chatApi authed!");
+                getChatHistory().then(setMessages);
+                addSocketReconnectListener(() => {
+                    getChatHistory().then(setMessages);
+                });
+                addMessageListener((message: RecivedMessage) => {
+                    setMessages((prev) => [message, ...prev]);
+                });
+                clearInterval(interval);
+            }
+        }, 100);
     }, []);
 
     return (

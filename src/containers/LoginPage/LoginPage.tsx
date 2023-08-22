@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { useAuthentication } from "../../contexts/AuthContext";
 import { UserCredentials } from "../../api/types";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import FormPage from "../FormPage/FormPage";
 import { NavigationLink } from "../../components";
@@ -25,6 +25,10 @@ const LoginPage: React.FC = () => {
             .then(() => navigate("/info"))
             .finally(() => setIsLoading(false));
     };
+
+    if (localStorage.getItem("access_token")) {
+        return <Navigate to="/chat" />;
+    }
 
     return (
         <FormPage
