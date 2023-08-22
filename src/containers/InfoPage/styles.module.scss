@@ -8,9 +8,7 @@ $guide-block-width: 750px;
 $guide-step-margin: 15px;
 
 .summary {
-  @media screen and (min-width: c.$phone-breakpoint) {
-    width: $info-block-width;
-  }
+  width: min($info-block-width, 100vw - 2 * c.$phone-margin);
 
   padding-top: $info-padding-top;
 
@@ -19,9 +17,7 @@ $guide-step-margin: 15px;
 }
 
 .guide {
-  @media screen and (min-width: c.$phone-breakpoint) {
-    width: $guide-block-width;
-  }
+  width: min($guide-block-width, 100vw - 2 * c.$phone-margin);
 
   ol {
     margin-top: 0;
@@ -64,10 +60,28 @@ $guide-step-margin: 15px;
 }
 
 .howItWorks {
-  @media screen and (max-width: c.$phone-breakpoint) {
-    svg {
-      width: calc(100vw - 2 * c.$phone-margin);
+  margin-inline: auto;
+  svg {
+    display: block;
+    margin: auto;
+
+    max-width: calc(100vw - 20px);
+
+    @media screen and (max-width: 900px) {
+      width: 200px;
       height: auto;
     }
+  }
+}
+
+.hide-on-phone {
+  @media screen and (max-width: 900px) {
+    display: none !important;
+  }
+}
+
+.show-on-phone {
+  @media screen and (min-width: 900px) {
+    display: none !important;
   }
 }

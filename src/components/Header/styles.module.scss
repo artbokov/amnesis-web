@@ -6,6 +6,10 @@
   align-items: center;
   justify-content: center;
 
+  @media screen and (max-width: c.$phone-breakpoint) {
+    justify-content: space-around;
+  }
+
   height: c.$header-height;
   width: 100vw;
 
@@ -21,16 +25,19 @@
     @media screen and (min-width: c.$phone-breakpoint) {
       position: absolute;
     }
-    @media screen and (max-width: c.$phone-breakpoint) {
+    @media screen and (max-width: 900px) {
       display: none;
     }
     left: 120px;
   }
 
   .user-data {
+    @media screen and (min-width: c.$phone-breakpoint) {
+      position: absolute;
+      right: 10px;
+    }
+
     display: flex;
-    position: absolute;
-    right: 10px;
     gap: 10px;
 
     .user-info {
@@ -55,5 +62,11 @@
       border-radius: 50%;
       background-color: #fff;
     }
+  }
+}
+
+.hide-on-phone {
+  @media screen and (max-width: 900px) {
+    display: none !important;
   }
 }

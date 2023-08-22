@@ -4,6 +4,7 @@ import { useAuthentication } from "../../contexts/AuthContext";
 import { useState } from "react";
 import { Popper, Box, Fade, Paper, Typography } from "@mui/material";
 import PopupState, { bindToggle, bindPopper } from "material-ui-popup-state";
+import classNames from "classnames";
 
 const links = [
     {
@@ -39,7 +40,12 @@ const Header = () => {
                         >
                             {user ? (
                                 <>
-                                    <div className={classes["user-info"]}>
+                                    <div
+                                        className={classNames(
+                                            classes["user-info"],
+                                            classes["hide-on-phone"]
+                                        )}
+                                    >
                                         <span className={classes["user-name"]}>
                                             {`${user.first_name} ${
                                                 user.second_name
@@ -50,8 +56,34 @@ const Header = () => {
                                         </span>
                                     </div>
                                     <div
-                                        className={classes["icon-imitation"]}
+                                        className={classNames(
+                                            classes["icon-imitation"],
+                                            classes["hide-on-phone"]
+                                        )}
                                     />
+                                    <Popper
+                                        {...bindPopper(popupState)}
+                                        transition
+                                    >
+                                        {({ TransitionProps }) => (
+                                            <Fade
+                                                {...TransitionProps}
+                                                timeout={350}
+                                            >
+                                                <Paper
+                                                    sx={{ marginTop: "15px" }}
+                                                >
+                                                    <Button
+                                                        color="bg-dark-blue"
+                                                        label="Выйти из профиля"
+                                                        onClick={() =>
+                                                            signOut()
+                                                        }
+                                                    />
+                                                </Paper>
+                                            </Fade>
+                                        )}
+                                    </Popper>
                                 </>
                             ) : (
                                 <NavigationLink
@@ -60,21 +92,6 @@ const Header = () => {
                                 />
                             )}
                         </div>
-                        {user ? (
-                            <Popper {...bindPopper(popupState)} transition>
-                                {({ TransitionProps }) => (
-                                    <Fade {...TransitionProps} timeout={350}>
-                                        <Paper sx={{ marginTop: "15px" }}>
-                                            <Button
-                                                color="bg-dark-blue"
-                                                label="Выйти из профиля"
-                                                onClick={() => signOut()}
-                                            />
-                                        </Paper>
-                                    </Fade>
-                                )}
-                            </Popper>
-                        ) : null}
                     </>
                 )}
             </PopupState>

@@ -38,7 +38,7 @@ class ChatApi {
 
     onMessage(e: any) {
         const response = JSON.parse(e.data);
-        console.log(e);
+
         const processMessageQueue = () => {
             for (const cb of this.messageCallbacks) {
                 for (const message of this.messageQueue) {

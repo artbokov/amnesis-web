@@ -90,6 +90,15 @@ class AuthApi {
         });
     }
 
+    getChat() {
+        return this.axiosInstance.get("/chat", {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            baseURL: `${BASE_URL}/messages`,
+        });
+    }
+
     downloadAvatar() {}
 
     getUserInfo(): Promise<UserInfo> {

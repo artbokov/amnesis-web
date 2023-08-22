@@ -19,7 +19,8 @@ $input-width: 820px;
   display: flex;
   flex-direction: row;
 
-  width: $input-width;
+  width: min($input-width, 100vw - 2 * c.$phone-margin);
+
   background-color: c.$gray;
   padding: 3px 7px 3px 15px;
 

@@ -9,12 +9,19 @@ $questions-block-title-font-size: 40px;
 }
 
 .questions {
-  @media screen and (min-width: c.$phone-breakpoint) {
-    width: $questions-block-width;
+  width: min($questions-block-width, 100vw - 2 * c.$phone-margin);
+
+  @media screen and (max-width: c.$phone-breakpoint) {
+    font-size: c.$font-size-s;
+    margin-bottom: -70px;
   }
+
   line-height: 22px;
 
   .title {
+    @media screen and (max-width: c.$phone-breakpoint) {
+      font-size: 30px;
+    }
     line-height: 60px;
   }
 
@@ -23,8 +30,8 @@ $questions-block-title-font-size: 40px;
     line-height: $questions-block-title-font-size;
 
     @media screen and (max-width: c.$phone-breakpoint) {
-      // font-size: c.$phone-primary-font-size;
-      // line-height: c.$phone-primary-font-size;
+      font-size: c.$font-size-m;
+      line-height: c.$font-size-m;
     }
   }
 }
@@ -36,6 +43,9 @@ $questions-block-title-font-size: 40px;
 
   @media screen and (min-width: c.$phone-breakpoint) {
     width: $questions-block-width;
+  }
+  @media screen and (max-width: c.$phone-breakpoint) {
+    width: calc(100vw - 2 * c.$phone-margin);
   }
 
   .col {

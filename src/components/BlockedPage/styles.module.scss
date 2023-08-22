@@ -23,6 +23,7 @@ $outer-gap: 95px;
     padding-left: c.$phone-margin;
     padding-right: c.$phone-margin;
   }
+  margin-block: auto;
 
   position: absolute;
 
@@ -42,15 +43,31 @@ $outer-gap: 95px;
     padding-left: 70px;
     padding-bottom: 20px;
 
+    @media screen and (max-width: c.$phone-breakpoint) {
+      font-size: c.$font-size-s;
+      line-height: c.$font-size-s;
+      padding-left: 0;
+    }
+
     z-index: c.$interface-z;
 
     background-color: c.$dark-blue;
     color: c.$secondary-text-color;
 
     p {
+      @media screen and (max-width: c.$phone-breakpoint) {
+        width: calc(100vw - 2 * c.$phone-margin);
+        padding-inline: c.$phone-margin;
+      }
+
       &:first-child {
         margin: 15px 0;
         font-size: c.$font-size-xl;
+
+        @media screen and (max-width: c.$phone-breakpoint) {
+          font-size: c.$font-size-l;
+          line-height: c.$font-size-l;
+        }
       }
       margin: 0;
       line-height: 30px;
@@ -60,6 +77,7 @@ $outer-gap: 95px;
 
 .title {
   text-align: center;
+
   font-size: c.$font-size-xl;
   color: c.$dark-blue;
 
