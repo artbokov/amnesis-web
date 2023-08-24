@@ -65,7 +65,7 @@ const routes: Route[] = [
     {
         path: "/chat",
         element: <ChatPage />,
-        isPrivate: true,
+        // isPrivate: true,
         layout: "main",
     },
     {

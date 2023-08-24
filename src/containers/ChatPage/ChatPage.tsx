@@ -6,6 +6,7 @@ import { useAuthentication } from "../../contexts/AuthContext";
 import { RecivedMessage } from "../../api/types";
 import { chatApi } from "../../api";
 import parse from "html-react-parser";
+import { Navigate } from "react-router-dom";
 
 const ChatPage = () => {
     const [messages, setMessages] = useState<RecivedMessage[]>([]);
@@ -34,6 +35,10 @@ const ChatPage = () => {
             }
         }, 100);
     }, []);
+
+    if (!localStorage.getItem("access_token")) {
+        return <Navigate to="/login" />;
+    }
 
     return (
         <div className={classes.wrapper}>
